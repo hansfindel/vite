@@ -1,0 +1,32 @@
+{
+    "Data": [
+        {
+            "accountid": "101752",
+            "account_name": "hijklmnopq",
+            "userid": "1",
+            "comment": "mnopqrstu",
+            "creation_date": "6 Jan 2008",
+            "account_type": "2",
+            "acc_type_name": "Дебетовая карта",
+            "currency": "144",
+            "letter_code": "",
+            "start_balance": "90.000.000",
+            "start_balance_raw": 90000000,
+            "to_total": true
+        },
+        {
+            "accountid": "144924",
+            "account_name": "emabcefghijklmnopqr",
+            "userid": "1",
+            "comment": "lmno",
+            "creation_date": "19 Jan 2008",
+            "account_type": "4",
+            "acc_type_name": "Банковский счёт",
+            "currency": "113",
+            "letter_code": "Le",
+            "start_balance": "360.000.000,00",
+            "start_balance_raw": 360000000,
+            "to_total": true
+        }
+    ]
+}
