@@ -17,7 +17,20 @@ var ev = new Event;
 var eventId = 0;
 var eventCollection = new EventsList;
 
+//Splash Constants
+var SPLASH_TRANSITION = 'slide';
+var SPLASH_TIME_OUT = 2000;
+
 //Views
+window.SplashView = Backbone.View.extend({
+	template:_.template($('#splash').html()),
+
+    render:function (eventName) {
+        $(this.el).html(this.template());
+        return this;
+    }
+});
+
 window.HomeView = Backbone.View.extend({
     template:_.template($('#home').html()),
 
@@ -82,7 +95,7 @@ window.RecommendationsView = Backbone.View.extend({
 var AppRouter = Backbone.Router.extend({
 
     routes:{
-        "":"home",
+        "":"splash",
         "home":"home",
         "details/:eventId/:reverseTransition":"details",
         "recommendations/:eventId/:reverseTransition":"recommendations"
@@ -99,7 +112,14 @@ var AppRouter = Backbone.Router.extend({
     },
 
     //Controllers
-
+    splash:function(){
+    	this.changePage(new SplashView());
+    	
+    	setTimeout(function(){
+            app.changePage(new HomeView({ collection: eventCollection }),SPLASH_TRANSITION);
+        }, SPLASH_TIME_OUT);
+    },
+    
     home:function (transition) {
         console.log('#home');
 
@@ -199,8 +219,5 @@ $(document).ready(function () {
             }
         });
     });
-
-
-
 
 });
