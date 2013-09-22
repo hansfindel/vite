@@ -18,12 +18,20 @@ var eventId = 0;
 var eventCollection = new EventsList;
 
 //Splash Constants
-var SPLASH_TRANSITION = 'slide';
 var SPLASH_TIME_OUT = 2000;
 
 //Views
 window.SplashView = Backbone.View.extend({
 	template:_.template($('#splash').html()),
+
+    render:function (eventName) {
+        $(this.el).html(this.template());
+        return this;
+    }
+});
+
+window.LoginView = Backbone.View.extend({
+	template:_.template($('#login').html()),
 
     render:function (eventName) {
         $(this.el).html(this.template());
@@ -116,8 +124,24 @@ var AppRouter = Backbone.Router.extend({
     	this.changePage(new SplashView());
     	
     	setTimeout(function(){
-            app.changePage(new HomeView({ collection: eventCollection }),SPLASH_TRANSITION);
+    		app.login();
         }, SPLASH_TIME_OUT);
+    },
+    
+    login:function(){
+		if(typeof(Storage)!=="undefined"){
+			if(localStorage.alreadyLogged !== 'true'){
+				localStorage.alreadyLogged = 'true';
+				this.changePage(new LoginView(),'slide');
+			}else{
+				app.home('slideleft');
+			}
+		}
+    	
+    	$('#btnLogin').bind("touchstart mousedown",function (){
+    		app.home('slideleft');
+        });
+    	
     },
     
     home:function (transition) {
@@ -130,6 +154,9 @@ var AppRouter = Backbone.Router.extend({
         else if (transition == 'slidedown'){
             this.changePage(new HomeView({ collection: eventCollection }),'slideup');
             eventId--;
+        }
+        else if(transition == 'slideleft'){
+        	this.changePage(new HomeView({ collection: eventCollection }),'slide');
         }
         else{
             this.changePage(new HomeView({ collection: eventCollection }),'slide',true);
@@ -219,5 +246,4 @@ $(document).ready(function () {
             }
         });
     });
-
 });
