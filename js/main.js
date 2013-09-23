@@ -4,7 +4,7 @@ Event = Backbone.Model.extend();
 EventsList = Backbone.Collection.extend({
   model: Event,
   url: function(){
-    return "/outro2/json/events.json";
+    return "http://162.243.16.96/events.json";
     },
   parse: function(response){
     return response.Data;
