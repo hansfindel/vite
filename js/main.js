@@ -4,7 +4,18 @@ Event = Backbone.Model.extend();
 EventsList = Backbone.Collection.extend({
   model: Event,
   url: function(){
-    return "http://162.243.16.96/events.json";
+	return "http://162.243.16.96/events.json";
+    },
+  parse: function(response){
+    return response.Data;
+    }
+});
+
+Recommendation = Backbone.Model.extend();
+RecommendationsList = Backbone.Collection.extend({
+  model: Recommendation,
+  url: function(){
+	return "http://162.243.16.96/recommendations.json";
     },
   parse: function(response){
     return response.Data;
@@ -82,7 +93,7 @@ window.DetailsView = Backbone.View.extend({
     template:_.template($('#details').html()),
 
     render:function (eventName) {
-        $(this.el).html(this.template());
+        $(this.el).html(this.template(ev));
         return this;
     }
 });
@@ -105,8 +116,8 @@ var AppRouter = Backbone.Router.extend({
     routes:{
         "":"splash",
         "home":"home",
-        "details/:eventId/:reverseTransition":"details",
-        "recommendations/:eventId/:reverseTransition":"recommendations"
+        "details/:eventdet/:reverseTransition":"details",
+        "recommendations/:eventdet/:reverseTransition":"recommendations"
     },
 
     initialize:function () {
@@ -165,7 +176,7 @@ var AppRouter = Backbone.Router.extend({
     },
 
 
-    details:function (eventId, reverseTransition) {
+    details:function (eventDet, reverseTransition) {
 
         if(reverseTransition == 1)
             this.changePage(new DetailsView(), 'slide',true);
@@ -173,7 +184,7 @@ var AppRouter = Backbone.Router.extend({
             this.changePage(new DetailsView(), 'slide');
     },
 
-    recommendations:function (eventId, reverseTransition) {
+    recommendations:function (eventDet, reverseTransition) {
         console.log('#recommendations');
         if(reverseTransition ==1)
             this.changePage(new RecommendationsView(),'slide',true);
