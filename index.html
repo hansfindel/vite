@@ -28,50 +28,58 @@
 
     <script type="text/template" id="home">
         <div id="header">
-            <a id="menu" href="#menu"></a>
+            <a id="menu" href="#menu" class="menu-link"></a>
             <h1 class="header-title">Upcoming</h1>
         </div>
         <div data-role="content">
             <a href="#details/<%= ev.get("id") %>/0">
                 <div id="to-event-details">
                     <img src='<%= ev.get("image") %>' alt="">
-                    <% if(ev.get("category") == 1){%>
+                    <% 
+						var category = 0;
+						if(ev.get("category") == 1){
+							category = 1;%>
                         <div id="category-1" style="cursor: hand;">
                             <div id="texto-categoria">ENTERTAINMENT</div>
                         </div>
                     <% }%>
-                    <% if(ev.get("category") == 2){%>
+                    <% if(ev.get("category") == 2){
+							category = 2;%>
                         <div id="category-2" style="cursor: hand;">
                             <div id="texto-categoria">CULTURAL</div>
                         </div>
                     <% }%>
-                    <% if(ev.get("category") == 3){%>
+                    <% if(ev.get("category") == 3){
+							category = 3;%>
                         <div id="category-3" style="cursor: hand;">
                             <div id="texto-categoria">WORK & EDUCATION</div>
                         </div>
                     <% }%>
-                    <% if(ev.get("category") == 4){%>
+                    <% if(ev.get("category") == 4){
+							category = 4;%>
                         <div id="category-4" style="cursor: hand;">
                             <div id="texto-categoria">TOURISM & ADVENTURE</div>
                         </div>
                     <% }%>
-                    <% if(ev.get("category") == 5){%>
+                    <% if(ev.get("category") == 5){
+							category = 5;%>
                         <div id="category-5" style="cursor: hand;">
                             <div id="texto-categoria">EXERCISE</div>
                         </div>
                     <% }%>
-                    <% if(ev.get("category") == 6){%>
+                    <% if(ev.get("category") == 6){
+							category = 6;%>
                         <div id="category-6" style="cursor: hand;">
                             <div id="texto-categoria">SOCIAL LIFE</div>
                         </div>
                     <% }%>
                     <div id="details" style="cursor: hand;">
                         <div id="left-top">
-                            <div id="titulo">
+                            <div id="titulo" class="category-<%= category%>-color">
                                 <%= ev.get("title") %></div>
                         </div>
                         <div id="right-top">
-                            <div id="date"><%= ev.get("date") %> - <%= ev.get("time") %></div>
+                            <div id="date" class="category-<%= category%>-color"><%= ev.get("date") %> - <%= ev.get("time") %></div>
                             <div id="address"><%= ev.get("venue") %></div>
                         </div>
                     </div>
@@ -118,42 +126,50 @@
             <a href="">
                 <div id="to-event-details">
                     <img src='<%= ev.get("image") %>' alt="">
-                    <% if(ev.get("category") == 1){%>
+                    <% 
+						var category = 0;
+						if(ev.get("category") == 1){
+							category = 1;%>
                         <div id="category-1" style="cursor: hand;">
                             <div id="texto-categoria">ENTERTAINMENT</div>
                         </div>
                     <% }%>
-                    <% if(ev.get("category") == 2){%>
+                    <% if(ev.get("category") == 2){
+							category = 2;%>
                         <div id="category-2" style="cursor: hand;">
                             <div id="texto-categoria">CULTURAL</div>
                         </div>
                     <% }%>
-                    <% if(ev.get("category") == 3){%>
+                    <% if(ev.get("category") == 3){
+							category = 3;%>
                         <div id="category-3" style="cursor: hand;">
                             <div id="texto-categoria">WORK & EDUCATION</div>
                         </div>
                     <% }%>
-                    <% if(ev.get("category") == 4){%>
+                    <% if(ev.get("category") == 4){
+							category = 4;%>
                         <div id="category-4" style="cursor: hand;">
                             <div id="texto-categoria">TOURISM & ADVENTURE</div>
                         </div>
                     <% }%>
-                    <% if(ev.get("category") == 5){%>
+                    <% if(ev.get("category") == 5){
+							category = 5;%>
                         <div id="category-5" style="cursor: hand;">
                             <div id="texto-categoria">EXERCISE</div>
                         </div>
                     <% }%>
-                    <% if(ev.get("category") == 6){%>
+                    <% if(ev.get("category") == 6){
+							category = 6;%>
                         <div id="category-6" style="cursor: hand;">
                             <div id="texto-categoria">SOCIAL LIFE</div>
                         </div>
                     <% }%>
                     <div id="details" style="cursor: hand;">
                         <div id="left-top">
-                            <div id="titulo"><%= ev.get("title") %></div>
+                            <div id="titulo" class="category-<%= category%>-color"><%= ev.get("title") %></div>
                         </div>
                         <div id="right-top">
-                            <div id="date">July 28 - 10pm</div>
+                            <div id="date" class="category-<%= category%>-color">July 28 - 10pm</div>
                             <div id="address">Eugene O Neill Theatre</div>
                         </div>
                          <div id="description" style="overflow:hidden; height:55px;" ><%= ev.get("description") %>
