@@ -55,7 +55,6 @@ window.HomeView = Backbone.View.extend({
 
     initialize:function() {
         _.bindAll(this,'render','addOne');    
-        this.collection.fetch();
         this.collection.bind('reset', this.addOne, eventCollection);
     },
 
@@ -126,8 +125,22 @@ var AppRouter = Backbone.Router.extend({
             return false;
         });
         this.firstPage = true;
-        //eventCollection.fetch();
-
+        
+        if(typeof(Storage)!=="undefined"){
+    		if(localStorage.getItem('localEventStorage') !== null){
+    			console.log(localStorage.getItem('localEventStorage'));
+    			eventCollection = new EventsList(JSON.parse(localStorage.getItem('localEventStorage')));
+    		}
+		}
+        eventCollection.fetch({
+        	success: function(){
+        		if(typeof(Storage)!=="undefined"){
+	        		if(eventCollection.length > 0){
+	        			localStorage.setItem('localEventStorage',JSON.stringify(eventCollection));
+	        		}
+        		}
+        	}
+        });
     },
 
     //Controllers
