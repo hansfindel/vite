@@ -160,18 +160,15 @@ var AppRouter = Backbone.Router.extend({
 
         if(transition == 'slideup'){
             this.changePage(new HomeView({ collection: eventCollection }),'slidedown');
-            eventId++;
         }
         else if (transition == 'slidedown'){
             this.changePage(new HomeView({ collection: eventCollection }),'slideup');
-            eventId--;
         }
         else if(transition == 'slideleft'){
         	this.changePage(new HomeView({ collection: eventCollection }),'slide');
         }
         else{
             this.changePage(new HomeView({ collection: eventCollection }),'slide',true);
-            //eventId++;
         }
     },
 
@@ -237,12 +234,21 @@ $(document).ready(function () {
 
     $(document.body).touchwipe({
         wipeUp: function() {
-        eventId++;
-            app.home('slideup');
+        	eventId--;
+            if(eventId < 0){
+            	eventId = 0;
+            }else{
+            	app.home('slideup');
+            }
         },
         wipeDown: function() {
-            eventId--;
-            app.home('slidedown');
+        	eventId++;
+        	if(eventId > eventCollection.length - 1){
+        		eventId = eventCollection.length - 1;
+        	}else{
+        		app.home('slidedown');
+        	}
+            
         },
         min_move_x: 20,
         min_move_y: 20,
