@@ -31,6 +31,9 @@ var eventCollection = new EventsList;
 //Splash Constants
 var SPLASH_TIME_OUT = 2000;
 
+//Swipe Var
+var swipeActive = false;
+
 //Views
 window.SplashView = Backbone.View.extend({
 	template:_.template($('#splash').html()),
@@ -109,6 +112,27 @@ window.RecommendationsView = Backbone.View.extend({
 
 //var homeView = new HomeView();
 
+function swipeUp(){
+	if(swipeActive){
+		eventId--;
+	    if(eventId < 0){
+	    	eventId = 0;
+	    }else{
+	    	app.home('slideup');
+	    }
+	}
+};
+
+function swipeDown(){
+	if(swipeActive){
+		eventId++;
+		if(eventId > eventCollection.length - 1){
+			eventId = eventCollection.length - 1;
+		}else{
+			app.home('slidedown');
+		}
+	}	
+};
 
 var AppRouter = Backbone.Router.extend({
 
@@ -146,7 +170,7 @@ var AppRouter = Backbone.Router.extend({
     //Controllers
     splash:function(){
     	this.changePage(new SplashView());
-    	
+    	swipeActive = false;
     	setTimeout(function(){
     		app.login();
         }, SPLASH_TIME_OUT);
@@ -157,6 +181,7 @@ var AppRouter = Backbone.Router.extend({
 			if(localStorage.alreadyLogged !== 'true'){
 				localStorage.alreadyLogged = 'true';
 				this.changePage(new LoginView(),'slide');
+				swipeActive = false;
 			}else{
 				app.home('slideleft');
 			}
@@ -183,6 +208,7 @@ var AppRouter = Backbone.Router.extend({
         else{
             this.changePage(new HomeView({ collection: eventCollection }),'slide',true);
         }
+        swipeActive = true;
     },
 
 
@@ -192,6 +218,7 @@ var AppRouter = Backbone.Router.extend({
             this.changePage(new DetailsView(), 'slide',true);
         else
             this.changePage(new DetailsView(), 'slide');
+        swipeActive = false;
     },
 
     recommendations:function (eventDet, reverseTransition) {
@@ -200,6 +227,7 @@ var AppRouter = Backbone.Router.extend({
             this.changePage(new RecommendationsView(),'slide',true);
         else
             this.changePage(new RecommendationsView(),'slide');
+        swipeActive = false;
     },
 
     changePage:function (page, pagetransition,reverse) {
@@ -247,25 +275,14 @@ $(document).ready(function () {
 
     $(document.body).touchwipe({
         wipeUp: function() {
-        	eventId--;
-            if(eventId < 0){
-            	eventId = 0;
-            }else{
-            	app.home('slideup');
-            }
+        	swipeUp();
         },
         wipeDown: function() {
-        	eventId++;
-        	if(eventId > eventCollection.length - 1){
-        		eventId = eventCollection.length - 1;
-        	}else{
-        		app.home('slidedown');
-        	}
-            
+        	swipeDown();
         },
-        min_move_x: 20,
-        min_move_y: 20,
-        preventDefaultEvents: true
+        min_move_x: 15,
+        min_move_y: 15,
+        preventDefaultEvents: false
     });
 
     $(document).on('pageshow',function( e, ui ){
