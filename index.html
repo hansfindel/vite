@@ -9,6 +9,22 @@
 	<link rel="stylesheet" href="css/mmenu.css"/>
 	<link rel="stylesheet" href="css/handheld.css"/>
 	<link rel="stylesheet" href="css/docs.css"/>
+	
+	<script type="text/template" id="splash">
+		<div data-role="content">
+			<div class="splash">
+				<img src="img/splash.jpg" alt="splash" />
+			</div>
+		</div>
+	</script>
+	
+	<script type="text/template" id="login">
+		<div data-role="content">
+			<div data-role="fieldcontain">
+				<input id="btnLogin" type="button" value="Register Later" />
+			</div>
+		</div>
+	</script>
 
     <script type="text/template" id="home">
         <div id="header">
@@ -16,40 +32,40 @@
             <h1 class="header-title">Upcoming</h1>
         </div>
         <div data-role="content">
-            <a href="">
+            <a href="#details/<%= ev.get('id') %>/0">
                 <div id="to-event-details">
-                    <img src='<%= ev.get("image") %>' alt="Event-image">
+                    <img src='<%= ev.get("image") %>' alt="">
                     <% if(ev.get("category") == 1){%>
-                        <div id="category-1" style="cursor: hand;">
+                        <div id="category-1">
                             <div id="texto-categoria">ENTERTAINMENT</div>
                         </div>
                     <% }%>
                     <% if(ev.get("category") == 2){%>
-                        <div id="category-2" style="cursor: hand;">
+                        <div id="category-2">
                             <div id="texto-categoria">CULTURAL</div>
                         </div>
                     <% }%>
                     <% if(ev.get("category") == 3){%>
-                        <div id="category-3" style="cursor: hand;">
+                        <div id="category-3" >
                             <div id="texto-categoria">WORK & EDUCATION</div>
                         </div>
                     <% }%>
                     <% if(ev.get("category") == 4){%>
-                        <div id="category-4" style="cursor: hand;">
+                        <div id="category-4" >
                             <div id="texto-categoria">TOURISM & ADVENTURE</div>
                         </div>
                     <% }%>
                     <% if(ev.get("category") == 5){%>
-                        <div id="category-5" style="cursor: hand;">
+                        <div id="category-5" >
                             <div id="texto-categoria">EXERCISE</div>
                         </div>
                     <% }%>
                     <% if(ev.get("category") == 6){%>
-                        <div id="category-6" style="cursor: hand;">
+                        <div id="category-6" >
                             <div id="texto-categoria">SOCIAL LIFE</div>
                         </div>
                     <% }%>
-                    <div id="details" style="cursor: hand;">
+                    <div id="details">
                         <div id="left-top">
                             <div id="titulo">
                                 <%= ev.get("title") %></div>
@@ -65,19 +81,19 @@
             <% if(ev.get("recommendation_id") != null) {%>
                 <div id="recommender" data-transition="fade" onclick="window.open('http://www.nypost.com/p/entertainment/theater/mormon_conquest_twlCrNAUI2E2z4l2tOqAWM', '_self');" style="cursor: hand;">
                     <div id="left-content">
-                        <img src='<%= ev.get("recommendation_image") %>'  alt="Rec" class="ri"/>    
+                        <img src='<%= ev.get("recommendation_image") %>'  alt="" class="ri"/>    
                     </div>
                     <div id="right-content">
                         <div id="name"><%= ev.get("recommendation_username") %></div>
                         <div id="post-time"><%= ev.get("recommendation_date") %></div>
                     </div>
-                    <div id="description-rec">"<%= ev.get('recommendation_text') %>"
+                    <div id="description-rec"> <%= ev.get("recommendation_text") %>
                     </div>
                 </div>
             <% }%>
         </div>
 
-        <nav id="menu">
+        <nav id="menu" >
             <ul>
                 <li class="center"><a href="index.html">Activity</a></li>
                 <li><a href="horizontal-submenus.html">Upcoming</a></li>
@@ -99,21 +115,48 @@
             <h1 class="header-title">Event</h1>
         </div>
         <div data-role="content">
-            <a href="#details/10/0">
+            <a href="">
                 <div id="to-event-details">
-                    <img src="img/event-image.jpg" alt="Event-image">
-                    <div id="category" style="cursor: hand;">
-                        <div id="texto-categoria">ENTERTAINMENT</div>
-                    </div>
-                    <div id="details" style="cursor: hand;">
+                    <img src='<%= ev.get("image") %>' alt="">
+                    <% if(ev.get("category") == 1){%>
+                        <div id="category-1" >
+                            <div id="texto-categoria">ENTERTAINMENT</div>
+                        </div>
+                    <% }%>
+                    <% if(ev.get("category") == 2){%>
+                        <div id="category-2" >
+                            <div id="texto-categoria">CULTURAL</div>
+                        </div>
+                    <% }%>
+                    <% if(ev.get("category") == 3){%>
+                        <div id="category-3">
+                            <div id="texto-categoria">WORK & EDUCATION</div>
+                        </div>
+                    <% }%>
+                    <% if(ev.get("category") == 4){%>
+                        <div id="category-4" >
+                            <div id="texto-categoria">TOURISM & ADVENTURE</div>
+                        </div>
+                    <% }%>
+                    <% if(ev.get("category") == 5){%>
+                        <div id="category-5" >
+                            <div id="texto-categoria">EXERCISE</div>
+                        </div>
+                    <% }%>
+                    <% if(ev.get("category") == 6){%>
+                        <div id="category-6" >
+                            <div id="texto-categoria">SOCIAL LIFE</div>
+                        </div>
+                    <% }%>
+                    <div id="details" >
                         <div id="left-top">
-                            <div id="titulo">THE BOOK OF MORMON</div>
+                            <div id="titulo"><%= ev.get("title") %></div>
                         </div>
                         <div id="right-top">
                             <div id="date">July 28 - 10pm</div>
                             <div id="address">Eugene O Neill Theatre</div>
                         </div>
-                         <div id="description" style="overflow:hidden; height:55px;" >The play opened at the Eugene O'Neil Theatre on March 24, 2011. The musical has been so popular that the theater has had problems with the sale of counterfeit tickets, through Craigslist, on multiple occasions. The musical is written and created by, of course, Matt Stone and Trey Parker, who also created South Park, Team America: World Police, and BASEketball. The duo received song writing help from lyricist and composer Robert Lopez, co-writer of Avenue Q. The Book of Mormon is co-directed by Trey Parker and Casey Nicholaw, who has choreographed The Drowsy Chaperone and Monty Python's Spamalot.
+                         <div id="description" style="overflow:hidden; height:55px;" ><%= ev.get("description") %>
                         </div>
                         <div id="action">
                             <div id='left'>

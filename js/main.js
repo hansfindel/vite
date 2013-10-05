@@ -5,7 +5,22 @@ EventsList = Backbone.Collection.extend({
   model: Event,
   url: function(){
     //return "/outro2/json/events.json";
-    return "/json/events.json";
+    //return "/json/events.json";
+	return "http://localhost:3000/events.json";
+    //return "http://162.243.16.96/events.json";
+    },
+  parse: function(response){
+    console.log("response: ", response)
+    //return response.Data;
+    return response.events;
+    }
+});
+
+Recommendation = Backbone.Model.extend();
+RecommendationsList = Backbone.Collection.extend({
+  model: Recommendation,
+  url: function(){
+	//return "http://162.243.16.96/recommendations.json";
     },
   parse: function(response){
     return response.Data;
@@ -18,19 +33,42 @@ var ev = new Event;
 var eventId = 0;
 var eventCollection = new EventsList;
 
+//Splash Constants
+//var SPLASH_TIME_OUT = 2000;
+var SPLASH_TIME_OUT = 200;
+
 //Views
+window.SplashView = Backbone.View.extend({
+	template:_.template($('#splash').html()),
+
+    render:function (eventName) {
+        $(this.el).html(this.template());
+        return this;
+    }
+});
+
+window.LoginView = Backbone.View.extend({
+	template:_.template($('#login').html()),
+
+    render:function (eventName) {
+        $(this.el).html(this.template());
+        return this;
+    }
+});
+
 window.HomeView = Backbone.View.extend({
     template:_.template($('#home').html()),
-
+    model: Event, 
     initialize:function() {
         _.bindAll(this,'render','addOne');    
         this.collection.fetch();
+        console.log("this.collection:", this.collection)
         this.collection.bind('reset', this.addOne, eventCollection);
     },
 
     render:function () {
-        console.log(this.collection.length);
-                console.log("Evento:" + eventId);
+        console.log("this.collection.length: ", this.collection.length);
+        console.log("Evento:" + eventId);
         if(eventCollection.length > 0){
             ev = eventCollection.at(eventId);
         }
@@ -49,10 +87,9 @@ window.HomeView = Backbone.View.extend({
     },
 
     addOne: function () {
-
-        console.log(this.collection.length);
-        console.log('addOne');
+        console.log("homeView addone:")
         this.render();
+        console.log("/homeView addone")
     }
 
 });
@@ -62,7 +99,7 @@ window.DetailsView = Backbone.View.extend({
     template:_.template($('#details').html()),
 
     render:function (eventName) {
-        $(this.el).html(this.template());
+        $(this.el).html(this.template(ev));
         return this;
     }
 });
@@ -83,10 +120,10 @@ window.RecommendationsView = Backbone.View.extend({
 var AppRouter = Backbone.Router.extend({
 
     routes:{
-        "":"home",
+        "":"splash",
         "home":"home",
-        "details/:eventId/:reverseTransition":"details",
-        "recommendations/:eventId/:reverseTransition":"recommendations"
+        "details/:eventdet/:reverseTransition":"details",
+        "recommendations/:eventdet/:reverseTransition":"recommendations"
     },
 
     initialize:function () {
@@ -100,7 +137,30 @@ var AppRouter = Backbone.Router.extend({
     },
 
     //Controllers
-
+    splash:function(){
+    	this.changePage(new SplashView());
+    	
+    	setTimeout(function(){
+    		app.login();
+        }, SPLASH_TIME_OUT);
+    },
+    
+    login:function(){
+		if(typeof(Storage)!=="undefined"){
+			if(localStorage.alreadyLogged !== 'true'){
+				localStorage.alreadyLogged = 'true';
+				this.changePage(new LoginView(),'slide');
+			}else{
+				app.home('slideleft');
+			}
+		}
+    	
+    	$('#btnLogin').bind("touchstart mousedown",function (){
+    		app.home('slideleft');
+        });
+    	
+    },
+    
     home:function (transition) {
         console.log('#home');
 
@@ -112,6 +172,9 @@ var AppRouter = Backbone.Router.extend({
             this.changePage(new HomeView({ collection: eventCollection }),'slideup');
             eventId--;
         }
+        else if(transition == 'slideleft'){
+        	this.changePage(new HomeView({ collection: eventCollection }),'slide');
+        }
         else{
             this.changePage(new HomeView({ collection: eventCollection }),'slide',true);
             //eventId++;
@@ -119,7 +182,7 @@ var AppRouter = Backbone.Router.extend({
     },
 
 
-    details:function (eventId, reverseTransition) {
+    details:function (eventDet, reverseTransition) {
 
         if(reverseTransition == 1)
             this.changePage(new DetailsView(), 'slide',true);
@@ -127,7 +190,7 @@ var AppRouter = Backbone.Router.extend({
             this.changePage(new DetailsView(), 'slide');
     },
 
-    recommendations:function (eventId, reverseTransition) {
+    recommendations:function (eventDet, reverseTransition) {
         console.log('#recommendations');
         if(reverseTransition ==1)
             this.changePage(new RecommendationsView(),'slide',true);
@@ -200,8 +263,4 @@ $(document).ready(function () {
             }
         });
     });
-
-
-
-
 });

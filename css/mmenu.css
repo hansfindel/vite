@@ -283,8 +283,8 @@ html.mm-opened .mm-page
 {
 	background: inherit;
 	height: 100%;
-	overflow: hidden;
-	position: absolute;
+	/*overflow: hidden;
+	position: absolute;*/
 }
 #mm-blocker
 {
@@ -690,8 +690,15 @@ html.mm-no-overflowscrolling.mm-right .mm-menu
 /*
 	Sizing and positioning for larger screens
 */
-@media all and (min-width: 500px) {
+.mm-menu, #menu{
+		z-index: 999;
+		display: none;
+}
+#menu.mm-opened{
+	display: block;
+}
 
+@media all and (min-width: 500px) {
 	.mm-menu.mm-right
 	{
 		left: auto;
