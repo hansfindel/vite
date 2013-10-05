@@ -170,27 +170,29 @@
                 </div>
              </a>
             <hr noshade />
-            <div id="recommender" data-transition="fade" onclick="window.open('http://www.nypost.com/p/entertainment/theater/mormon_conquest_twlCrNAUI2E2z4l2tOqAWM', '_self');" style="cursor: hand;">
-                <div id="left-content">
-                    <img src="img/recommender-profile-photo.jpg"  alt="Rec" class="ri"/>    
+            <% if(ev.get("recommendation_id") != null) {%>
+                <div id="recommender" data-transition="fade" onclick="window.open('http://www.nypost.com/p/entertainment/theater/mormon_conquest_twlCrNAUI2E2z4l2tOqAWM', '_self');" style="cursor: hand;">
+                    <div id="left-content">
+                        <img src='<%= ev.get("recommendation_image") %>'  alt="" class="ri"/>    
+                    </div>
+                    <div id="right-content">
+                        <div id="name"><%= ev.get("recommendation_username") %></div>
+                        <div id="post-time">Posted on <%= ev.get("recommendation_date") %></div>
+                    </div>
+                    <div id="description-rec"> <%= ev.get("recommendation_text") %>
+                    </div>
                 </div>
-                <div id="right-content">
-                    <div id="name">The New York Post</div>
-                    <div id="post-time">Posted on March 24, 2011</div>
-                </div>
-                <div id="description-rec">"fiendishly well-crafted, hilariously smart"
-                </div>
-            </div>
+            <% }%>
             <hr noshade />
             <div id="view-more">
-                <a href="#recommendations/10/0" class="date" data-transition="slideup">view more recommendations</a>
+                <a href="#recommendations/<%= ev.get('id') %>/0" class="date" data-transition="slideup">view more recommendations</a>
             </div>
         </div>
     </script>
 
     <script type="text/template" id="recommendations">
         <div id="header">
-            <a href="#details/10/1">Back</a>
+            <a href="#details/<%= ev.get('id') %>/1">Back</a>
             <h1 class="header-title">Recommendations</h1>
         </div>
 
