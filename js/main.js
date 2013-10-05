@@ -242,7 +242,10 @@ var AppRouter = Backbone.Router.extend({
         else
             transition =  $.mobile.defaultPageTransition;   
         
-        $('nav#menu').mmenu();
+        $('nav#menu').mmenu({
+            configuration: {pageSelector: '> div[data-role="page"]:first'}
+        });
+
         if (this.firstPage) {
             transition = 'none';
             this.firstPage = false;
