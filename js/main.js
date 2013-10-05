@@ -1,4 +1,4 @@
-
+var api_host = "http://192.168.0.178:3000";
 //Models
 Event = Backbone.Model.extend();
 EventsList = Backbone.Collection.extend({
@@ -6,12 +6,13 @@ EventsList = Backbone.Collection.extend({
   url: function(){
     //return "/outro2/json/events.json";
     //return "/json/events.json";
-	return "http://localhost:3000/events.json";
+	return api_host + "/events.json";
     //return "http://162.243.16.96/events.json";
     },
   parse: function(response){
-    console.log("response: ", response)
+    //console.log("response: ", response)
     //return response.Data;
+    //return response;
     return response.events;
     }
 });
@@ -21,9 +22,11 @@ RecommendationsList = Backbone.Collection.extend({
   model: Recommendation,
   url: function(){
 	//return "http://162.243.16.96/recommendations.json";
+    return api_host + "/recommendations.json";
     },
   parse: function(response){
-    return response.Data;
+    //return response.Data;
+    return response.recommendations;
     }
 });
 
@@ -58,9 +61,10 @@ window.LoginView = Backbone.View.extend({
 
 window.HomeView = Backbone.View.extend({
     template:_.template($('#home').html()),
-    model: Event, 
+    //model: Event, 
     initialize:function() {
         _.bindAll(this,'render','addOne');    
+        //this.collection.fetch({dataType: "jsonp"});
         this.collection.fetch();
         console.log("this.collection:", this.collection)
         this.collection.bind('reset', this.addOne, eventCollection);

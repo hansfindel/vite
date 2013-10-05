@@ -85,7 +85,7 @@
                     </div>
                     <div id="right-content">
                         <div id="name"><%= ev.get("recommendation_username") %></div>
-                        <div id="post-time"><%= ev.get("recommendation_date") %></div>
+                        <div id="post-time">Posted on <%= ev.get("recommendation_date") %></div>
                     </div>
                     <div id="description-rec"> <%= ev.get("recommendation_text") %>
                     </div>
@@ -117,7 +117,7 @@
         <div data-role="content">
             <a href="">
                 <div id="to-event-details">
-                    <img src='<%= ev.get("image") %>' alt="">
+                    <img src='<%= ev.get("image") %>' alt='<%= ev.get("title") %>'>
                     <% if(ev.get("category") == 1){%>
                         <div id="category-1" >
                             <div id="texto-categoria">ENTERTAINMENT</div>
@@ -153,8 +153,8 @@
                             <div id="titulo"><%= ev.get("title") %></div>
                         </div>
                         <div id="right-top">
-                            <div id="date">July 28 - 10pm</div>
-                            <div id="address">Eugene O Neill Theatre</div>
+                            <div id="date"><%= ev.get("date") %> - <%= ev.get("time") %></div>
+                            <div id="address"><%= ev.get("venue") %></div>
                         </div>
                          <div id="description" style="overflow:hidden; height:55px;" ><%= ev.get("description") %>
                         </div>
