@@ -4,7 +4,8 @@ Event = Backbone.Model.extend();
 EventsList = Backbone.Collection.extend({
   model: Event,
   url: function(){
-	return "http://162.243.16.96/events.json";
+	//return "http://162.243.16.96/events.json";
+	return "http://outro.vitenow.com/events.json";
     },
   parse: function(response){
     return response.Data;
@@ -260,6 +261,8 @@ var AppRouter = Backbone.Router.extend({
 
 $(document).on("mobileinit", function(){
     $.mobile.changePage.defaults.allowSamePageTransition = true;
+	$.support.cors = true;
+	$.mobile.allowCrossDomainPages=true;
 });
 
 $(document).ready(function () {
