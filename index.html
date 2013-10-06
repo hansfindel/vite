@@ -75,6 +75,7 @@
                             <div id="date"><%= ev.get("date") %> - <%= ev.get("time") %></div>
                             <div id="address"><%= ev.get("venue") %></div>
                         </div>
+                        <div id="description" style="overflow:hidden; height:55px;" ><%= ev.get("description") %>
                     </div>
                 </div>
              </a>
@@ -159,7 +160,15 @@
                             <div id="date"><%= ev.get("date") %> - <%= ev.get("time") %></div>
                             <div id="address"><%= ev.get("venue") %></div>
                         </div>
-                         <div id="description" style="overflow:hidden; height:55px;" ><%= ev.get("description") %>
+                         <div id="description" style="overflow:hidden; height:55px;" >
+                            <%= ev.get("description") %>
+                        </div>
+                    </div>
+                </a>
+                        <div id="description-more">
+                            <a class="view_more more color-<%=ev.get('category')%>">
+                                Ver más
+                            </a>
                         </div>
                         <div id="action">
                             <div id='left'>
@@ -170,8 +179,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-             </a>
+                
+             
             <hr noshade />
             <% if(ev.get("recommendation_id") != null) {%>
                 <div id="recommender" data-transition="fade" onclick="window.open('http://www.nypost.com/p/entertainment/theater/mormon_conquest_twlCrNAUI2E2z4l2tOqAWM', '_self');" style="cursor: hand;">
@@ -192,6 +201,39 @@
                 </div>
             <% }%>
         </div>
+        <script type="text/javascript">
+            function check_description(){
+                var description_element = document.getElementById("description");
+                var scrollHeight = description_element.scrollHeight;
+                var height = $(description_element).height();
+                console.log(scrollHeight);
+                console.log(height);
+                if(scrollHeight < height){ 
+                    console.log("asdfafsasdfaf")
+                    $("#description-more").text("");
+                    $("#description-more").html("");
+                }
+                $(".view_more").unbind("click");
+                $(".view_more").click(function(e){
+                    e.preventDefault();
+                    var link = $(this).children("a");
+                    if($(this).hasClass("more")){
+                        $(this).removeClass("more");
+                        $(this).addClass("less");
+                        $(this).html("Ver menos")
+                        $("#description").css("height", "");
+                    }
+                    else{
+                        $(this).addClass("more");
+                        $(this).removeClass("less");
+                        $(this).html("Ver más")
+                        $("#description").css("height", "55px");
+                    }
+                    return false;
+                });
+            }
+            check_description();
+        </script>
     </script>
 
     <script type="text/template" id="recommendations">

@@ -116,6 +116,7 @@ window.DetailsView = Backbone.View.extend({
             app.navigate('#', {trigger: true}); 
         }
         $(this.el).html(this.template(ev));
+
         return this;
     }
 });
@@ -218,6 +219,7 @@ var AppRouter = Backbone.Router.extend({
             this.changePage(new DetailsView(), 'slide',true);
         else
             this.changePage(new DetailsView(), 'slide');
+        check_description();
     },
 
     recommendations:function (eventDet, reverseTransition) {

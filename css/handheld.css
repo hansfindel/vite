@@ -480,4 +480,32 @@
         	margin-top: 5%;
         	margin-bottom: 5%;
         	width: 25%;  	
-        }        
+        }      
+#description-more{
+	margin-top: -25px;
+}  
+.view_more{
+	margin-left: 35px;
+	cursor: pointer;
+}
+.color-1 {
+	color: #2468b7;
+}
+.color-2 {
+	color: #01a7a7;
+}
+.color-3 {
+	color: #308d22;
+}
+.color-4 {
+	color: #e89901;
+}
+.color-5 {
+	color: #bd000a;
+}
+.color-6 {
+	color: #a1007c;
+}
+.color-7 {
+	color: #6c3d97;
+}
