@@ -129,8 +129,11 @@ window.RecommendationsView = Backbone.View.extend({
     },
     render: function (eventName) {
         console.log("ev: ", ev)
+        if(ev == undefined || ev.get("id") == undefined){
+            app.navigate("#", {trigger: true})
+        }
         var comments = recommendationCollection.filterById(ev.id).models || [];
-        if(comments===[]){
+        if(comments.length == 0){
             app.navigate('#details/<%= ev.get("id") %>/0', {trigger: true}); 
         }
         console.log("recommendations: ", comments);
