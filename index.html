@@ -299,11 +299,11 @@
         <div data-role="content">   
             <div id="details">
                 <div class="profile_image_container">
-                    <img class="profile_image" src='<%= ev.get("image") %>' alt='<%= ev.get("title") %>'>
+                    <img class="profile_image" src='<%= profile.get("image") %>' alt='<%= ev.get("title") %>'>
                 </div>
                 <div id="left-top">
-                    <div id="titulo" class="category-<%= ev.get('category') %>-color">
-                        titulo.. 
+                    <div id="titulo" class="name">
+                        <%= profile.get('first_name') %> (nombre)
                     </div>
                 </div>
                 <div id="right-top">

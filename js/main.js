@@ -41,6 +41,36 @@ RecommendationsList = Backbone.Collection.extend({
   }
 });
 
+User = Backbone.Model.extend();
+UsersList = Backbone.Collection.extend({
+  model: User,
+  url: function(){
+    //return "http://162.243.16.96/recommendations.json";
+    return api_host + "/users.json";
+  },
+  parse: function(response){
+    //return response.Data;
+    return response.users;
+  },
+  getById: function(uid){
+    users = this.filter(function(current_user) {
+        
+      return current_user.get("id") == uid;
+    });
+    return users[0];
+  }
+  /*
+  follows: function(event_id) {
+    filtered = this.filter(function(recommendation) {
+      return recommendation.get("event_id") === event_id;
+      });
+    return new RecommendationsList(filtered);
+  },
+  following: function(){}
+  */
+
+});
+
 //Vars
 
 var ev = new Event;
@@ -48,6 +78,10 @@ var eventId = 0;
 var eventCollection = new EventsList;
 var recommendationCollection = new RecommendationsList;
 recommendationCollection.fetch(); 
+var us = new User;
+var userCollection = new UsersList;
+userCollection.fetch();
+
 
 //Splash Constants
 //var SPLASH_TIME_OUT = 2000;
@@ -158,9 +192,9 @@ window.RecommendationsView = Backbone.View.extend({
         if(comments.length == 0){
             app.navigate('#details/<%= ev.get("id") %>/0', {trigger: true}); 
         }
-        console.log("recommendations: ", comments);
+        //console.log("recommendations: ", comments);
         $(this.el).html(this.template( {comments: comments} ));
-        console.log("this <RecommendationsView>: ", this)
+        //console.log("this <RecommendationsView>: ", this)
         return this;
     }
 });
@@ -169,12 +203,19 @@ window.ProfileView = Backbone.View.extend({
 
     template: _.template($('#profile').html()),
     initialize: function(userid){
-        profile = userid
-    },
+        if(userCollection.models.length == 0){
+            userCollection.fetch();
+        }
+        console.log(userid)
+        us = userCollection.getById(userid);  
+    }, 
     render: function () {
-        console.log(profile);
-        //console.log("asdfass");
-        $(this.el).html(this.template( {profile: profile} ));
+        if(userCollection.models.length == 0 || us == undefined){
+            console.log(userCollection)
+            console.log(us);
+            app.navigate("#", {trigger: true})
+        }        
+        $(this.el).html(this.template( {profile: us} ));
         return this;
     }
 });
@@ -230,7 +271,7 @@ var AppRouter = Backbone.Router.extend({
         
         if(typeof(Storage)!=="undefined"){
     		if(localStorage.getItem('localEventStorage') !== null){
-    			console.log(localStorage.getItem('localEventStorage'));
+    			//console.log(localStorage.getItem('localEventStorage'));
     			eventCollection = new EventsList(JSON.parse(localStorage.getItem('localEventStorage')));
     		}
 		}
@@ -338,6 +379,7 @@ var AppRouter = Backbone.Router.extend({
     },
     profile: function(userid){
         console.log('#profile');
+
         this.changePage(new ProfileView(userid),'slide');
     }
 });
