@@ -81,11 +81,24 @@ window.HomeView = Backbone.View.extend({
 
     render:function () {
         console.log("this.collection.length: ", this.collection.length);
-        console.log("Evento:" + eventId);
+        console.log("Evento: " + eventId);
+        var prev, next;
         if(eventCollection.length > 0){
-            ev = eventCollection.at(eventId);
+            ev   = eventCollection.at(eventId);
+            if(eventId > 0){
+                prev = eventCollection.at(eventId - 1);    
+            }
+            else{
+                prev = undefined;
+            }
+            if(eventId < eventCollection.length){
+                next = eventCollection.at(eventId + 1);
+            }
+            else{
+                next = undefined;
+            }
+            //console.log("prev: ", prev, "ev: ", ev, "next: ", next);
         }
-
         if(ev==null){
             console.log('ev es null');
             $(this.el).html(this.template());
@@ -93,7 +106,7 @@ window.HomeView = Backbone.View.extend({
             console.log('ev tiene modelo');
             console.log(ev);
             console.log(ev.toJSON());
-            $(this.el).html(this.template(ev));
+            $(this.el).html( this.template({ev: ev, prev: prev, next: next}) );
         }
         
         return this;
@@ -147,6 +160,12 @@ window.RecommendationsView = Backbone.View.extend({
 
 //var homeView = new HomeView();
 
+window.swipeUp = function(){
+    return app.home("slideup");
+}
+window.swipeDown = function(){
+    return app.home("slidedown");
+}
 
 var AppRouter = Backbone.Router.extend({
 
@@ -275,7 +294,7 @@ $(document).ready(function () {
 
     $(document.body).touchwipe({
         wipeUp: function() {
-        eventId++;
+            eventId++;
             app.home('slideup');
         },
         wipeDown: function() {

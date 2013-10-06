@@ -33,6 +33,10 @@
             <a id="notification" href=""></a>
         </div>
         <div data-role="content">
+            <% if( prev ){ %>
+                <a href="#" onclick="swipeDown();"><div id="category-<%= prev.get('category') %>" ></div></a>
+            <% } %>
+            <a href=""><div id="category-" ></div></a>
             <a href="#details/<%= ev.get('id') %>/0">
                 <div id="to-event-details">
                     <img src='<%= ev.get("image") %>' alt="">
@@ -93,8 +97,10 @@
                     </div>
                 </div>
             <% }%>
+            <% if( next ){%>
+                <a href="#" onclick="swipeUp();"><div id="category-<%= next.get('category') %>" ></div></a>
+            <% } %>
         </div>
-
         <nav id="menu" >
             <ul>
                 <li class="center"><a href="index.html">Activity</a></li>
@@ -167,22 +173,23 @@
                         </div>
                     </div>
                 </a>
-                        <div id="description-more">
-                            <a class="view_more more color-<%=ev.get('category')%>">
-                                Ver más
-                            </a>
-                        </div>
-                        <div id="action">
-                            <div id='left'>
-                                <a href=""><img src="img/tickets<%= ev.get('category') %>.png"/></a> 
-                            </div>
-                            <div id='right'>
-                                <a href=""><img src="img/share<%= ev.get('category') %>.png"/></a> 
-                            </div>
+                        
+                <div id="description-more">
+                    <a class="view_more more color-<%=ev.get('category')%>">
+                        Ver más
+                    </a>
+                </div>
+                <div id="action">
+                    <div id='left'>
+                        <a href=""><img src="img/tickets<%= ev.get('category') %>.png"/></a> 
+                    </div>
+                    <div id='right'>
+                            <a href=""><img src="img/share<%= ev.get('category') %>.png"/></a> 
                         </div>
                     </div>
+                </div>
                 
-             
+          
             <hr noshade />
             <% if(ev.get("recommendation_id") != null) {%>
                 <div id="recommender" data-transition="fade" onclick="window.open('http://www.nypost.com/p/entertainment/theater/mormon_conquest_twlCrNAUI2E2z4l2tOqAWM', '_self');" style="cursor: hand;">
