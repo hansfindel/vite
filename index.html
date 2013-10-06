@@ -195,43 +195,25 @@
             <a href="#details/<%= ev.get('id') %>/1">Back</a>
             <h1 class="header-title">Recommendations</h1>
         </div>
-
         <div data-role="content">
-            <div id="recommender" data-transition="fade" onclick="window.open('http://www.nypost.com/p/entertainment/theater/mormon_conquest_twlCrNAUI2E2z4l2tOqAWM', '_self');" style="cursor: hand;">
+            <% for(var i = 0; i < comments.length; i++){%> 
+                <div class="recommender" data-transition="fade" onclick="window.open('http://www.nypost.com/p/entertainment/theater/mormon_conquest_twlCrNAUI2E2z4l2tOqAWM', '_self');" style="cursor: hand;">
                 <div id="left-content">
-                    <img src="img/recommender-profile-photo.jpg"  alt="Rec" class="ri"/>    
+                    <img src="<%= comments[i].get('image') %>"  alt="Rec" class="ri"/>    
                 </div>
                 <div id="right-content">
-                    <div id="name">The New York Post</div>
-                    <div id="post-time">Posted on March 24, 2011</div>
+                    <div id="name"><%= comments[i].get('name') %></div>
+                    <div id="post-time">Posted on <%= comments[i].get('date') %> </div>
                 </div>
-                <div id="description-rec">It’s a fiendishly well-crafted, hilariously smart, or maybe smartly hilarious, song-and-dance extravaganza. The show’s a hoot. The show’s a hit. - Elisabeth Vincentelli
-                </div>
-            </div>
-            <hr noshade /> 
-            <div id="recommender" data-transition="fade" onclick="window.open('http://www.nypost.com/p/entertainment/theater/mormon_conquest_twlCrNAUI2E2z4l2tOqAWM', '_self');" style="cursor: hand;">
-                <div id="left-content">
-                    <img src="img/recommender-profile-photo.jpg"  alt="Rec" class="ri"/>    
-                </div>
-                <div id="right-content">
-                    <div id="name">The New York Post</div>
-                    <div id="post-time">Posted on March 24, 2011</div>
-                </div>
-                <div id="description-rec">It’s a fiendishly well-crafted, hilariously smart, or maybe smartly hilarious, song-and-dance extravaganza. The show’s a hoot. The show’s a hit. - Elisabeth Vincentelli
+                <div id="description-rec">
+                    <%= comments[i].get('text') %> - <%= comments[i].get('name') %>
                 </div>
             </div>
-            <hr noshade /> 
-            <div id="recommender" data-transition="fade" onclick="window.open('http://www.nypost.com/p/entertainment/theater/mormon_conquest_twlCrNAUI2E2z4l2tOqAWM', '_self');" style="cursor: hand;">
-                <div id="left-content">
-                    <img src="img/recommender-profile-photo.jpg"  alt="Rec" class="ri"/>    
-                </div>
-                <div id="right-content">
-                    <div id="name">The New York Post</div>
-                    <div id="post-time">Posted on March 24, 2011</div>
-                </div>
-                <div id="description-rec">It’s a fiendishly well-crafted, hilariously smart, or maybe smartly hilarious, song-and-dance extravaganza. The show’s a hoot. The show’s a hit. - Elisabeth Vincentelli
-                </div>
-            </div>
+            <% if(i < comments.length - 1){%> 
+                <hr noshade /> 
+            <% } %>
+        <% } %>
+            
         </div>
     </script>
 

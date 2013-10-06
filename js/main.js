@@ -27,7 +27,13 @@ RecommendationsList = Backbone.Collection.extend({
   parse: function(response){
     //return response.Data;
     return response.recommendations;
-    }
+    },
+  filterById: function(event_id) {
+    filtered = this.filter(function(recommendation) {
+      return recommendation.get("event_id") === event_id;
+      });
+    return new RecommendationsList(filtered);
+  }
 });
 
 //Vars
@@ -35,6 +41,8 @@ RecommendationsList = Backbone.Collection.extend({
 var ev = new Event;
 var eventId = 0;
 var eventCollection = new EventsList;
+var recommendationCollection = new RecommendationsList;
+recommendationCollection.fetch(); 
 
 //Splash Constants
 //var SPLASH_TIME_OUT = 2000;
@@ -110,10 +118,14 @@ window.DetailsView = Backbone.View.extend({
 
 window.RecommendationsView = Backbone.View.extend({
 
-    template:_.template($('#recommendations').html()),
-
-    render:function (eventName) {
-        $(this.el).html(this.template());
+    template: _.template($('#recommendations').html()),
+    
+    render: function (eventName) {
+        console.log("ev: ", ev)
+        var comments = recommendationCollection.filterById(ev.id).models || [];
+        console.log("recommendations: ", comments);
+        $(this.el).html(this.template( {comments: comments} ));
+        console.log("this <RecommendationsView>: ", this)
         return this;
     }
 });

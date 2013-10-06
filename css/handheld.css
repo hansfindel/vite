@@ -326,7 +326,7 @@
 
 
 
-        #recommender {
+        #recommender, .recommender {
             background: transparent;
             margin-top: 5%;
             width: 100%;
