@@ -1,6 +1,6 @@
-//var api_host = "http://192.168.0.178:3000";
+var api_host = "http://192.168.0.178:3000";
 //var api_host = "http://162.243.16.96";
-var api_host = "localhost:3000"
+//var api_host = "localhost:3000"
 
 //Models
 Event = Backbone.Model.extend();
@@ -49,7 +49,7 @@ recommendationCollection.fetch();
 
 //Splash Constants
 //var SPLASH_TIME_OUT = 2000;
-var SPLASH_TIME_OUT = 200;
+var SPLASH_TIME_OUT = 500;
 
 //Views
 window.SplashView = Backbone.View.extend({
@@ -144,7 +144,7 @@ window.RecommendationsView = Backbone.View.extend({
             recommendationCollection.fetch();
         }
     },
-    render: function (eventName) {
+    render: function () {
         console.log("ev: ", ev)
         if(ev == undefined || ev.get("id") == undefined){
             app.navigate("#", {trigger: true})
@@ -156,6 +156,20 @@ window.RecommendationsView = Backbone.View.extend({
         console.log("recommendations: ", comments);
         $(this.el).html(this.template( {comments: comments} ));
         console.log("this <RecommendationsView>: ", this)
+        return this;
+    }
+});
+
+window.ProfileView = Backbone.View.extend({
+
+    template: _.template($('#profile').html()),
+    initialize: function(userid){
+        profile = userid
+    },
+    render: function () {
+        console.log(profile);
+        //console.log("asdfass");
+        $(this.el).html(this.template( {profile: profile} ));
         return this;
     }
 });
@@ -175,7 +189,8 @@ var AppRouter = Backbone.Router.extend({
         "":"splash",
         "home":"home",
         "details/:eventdet/:reverseTransition":"details",
-        "recommendations/:eventdet/:reverseTransition":"recommendations"
+        "recommendations/:eventdet/:reverseTransition":"recommendations", 
+        "profile/:userid":"profile"
     },
 
     initialize:function () {
@@ -245,9 +260,9 @@ var AppRouter = Backbone.Router.extend({
 
     recommendations:function (eventDet, reverseTransition) {
         console.log('#recommendations');
-        if(reverseTransition ==1)
-            this.changePage(new RecommendationsView(),'slide',true);
-        else
+        //if(reverseTransition ==1)
+        //    this.changePage(new RecommendationsView(),'slide',true);
+        //else
             this.changePage(new RecommendationsView(),'slide');
     },
 
@@ -274,6 +289,10 @@ var AppRouter = Backbone.Router.extend({
         else
             $.mobile.changePage($(page.el), {changeHash:false, transition: transition});
     },
+    profile: function(userid){
+        console.log('#profile');
+        this.changePage(new ProfileView(userid),'slide');
+    }
 });
 
 $(document).on("mobileinit", function(){
