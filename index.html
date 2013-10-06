@@ -296,8 +296,31 @@
             <h1 class="header-title">Profile</h1>
             <a id="notification" href=""></a>
         </div>
-        <div data-role="content">
-            <div id="user_profile">Content of profile</div>
+        <div data-role="content">   
+            <div id="details">
+                <div class="profile_image_container">
+                    <img class="profile_image" src='<%= ev.get("image") %>' alt='<%= ev.get("title") %>'>
+                </div>
+                <div id="left-top">
+                    <div id="titulo" class="category-<%= ev.get('category') %>-color">
+                        titulo.. 
+                    </div>
+                </div>
+                <div id="right-top">
+                    <div class="links">
+                        <a href="">Recommendations</a>
+                        <a href="">Followers</a>
+                        <a href="">Followees</a>
+                    </div>
+                    <div id="date"><%= ev.get("date") %> - <%= ev.get("time") %></div>
+                    <div id="address"><%= ev.get("venue") %></div>
+                </div>
+                <div id="description" style="overflow:hidden; height:55px;" >
+                    <%= ev.get("description") %>
+                </div>
+            </div>
+            <hr noshade />
+
         </div>
     </script>
 
