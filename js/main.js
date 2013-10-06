@@ -119,7 +119,11 @@ window.DetailsView = Backbone.View.extend({
 window.RecommendationsView = Backbone.View.extend({
 
     template: _.template($('#recommendations').html()),
-    
+    initialize: function(){
+        if(recommendationCollection.models.length == 0){
+            recommendationCollection.fetch();
+        }
+    },
     render: function (eventName) {
         console.log("ev: ", ev)
         var comments = recommendationCollection.filterById(ev.id).models || [];

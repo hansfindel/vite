@@ -182,11 +182,12 @@
                     <div id="description-rec"> <%= ev.get("recommendation_text") %>
                     </div>
                 </div>
+            
+                <hr noshade />
+                <div id="view-more">
+                    <a href="#recommendations/<%= ev.get('id') %>/0" class="date" data-transition="slideup">view more recommendations</a>
+                </div>
             <% }%>
-            <hr noshade />
-            <div id="view-more">
-                <a href="#recommendations/<%= ev.get('id') %>/0" class="date" data-transition="slideup">view more recommendations</a>
-            </div>
         </div>
     </script>
 
