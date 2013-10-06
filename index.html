@@ -85,13 +85,17 @@
              </a>
             <hr noshade />
             <% if(ev.get("recommendation_id") != null) {%>
-                <div id="recommender" data-transition="fade" onclick="window.open('http://www.nypost.com/p/entertainment/theater/mormon_conquest_twlCrNAUI2E2z4l2tOqAWM', '_self');" style="cursor: hand;">
+                <div id="recommender" data-transition="fade" style="cursor: hand;">
                     <div id="left-content">
-                        <img src='<%= ev.get("recommendation_image") %>'  alt="" class="ri"/>    
+                        <a href="#profile/<%= ev.get('recommendation_user_id') %>">
+                            <img src='<%= ev.get("recommendation_image") %>'  alt="" class="ri"/>    
+                        </a>
                     </div>
                     <div id="right-content">
                         <div id="name"><%= ev.get("recommendation_username") %></div>
-                        <div id="post-time">Posted on <%= ev.get("recommendation_date") %></div>
+                        <div id="post-time"  onclick="window.open('http://www.nypost.com/p/entertainment/theater/mormon_conquest_twlCrNAUI2E2z4l2tOqAWM', '_self');">
+                            Posted on <%= ev.get("recommendation_date") %>
+                        </div>
                     </div>
                     <div id="description-rec"> <%= ev.get("recommendation_text") %>
                     </div>
@@ -192,13 +196,17 @@
           
             <hr noshade />
             <% if(ev.get("recommendation_id") != null) {%>
-                <div id="recommender" data-transition="fade" onclick="window.open('http://www.nypost.com/p/entertainment/theater/mormon_conquest_twlCrNAUI2E2z4l2tOqAWM', '_self');" style="cursor: hand;">
+                <div id="recommender" data-transition="fade" style="cursor: hand;">
                     <div id="left-content">
-                        <img src='<%= ev.get("recommendation_image") %>'  alt="" class="ri"/>    
+                        <a href="#profile/<%= ev.get('recommendation_user_id') %>">
+                            <img src='<%= ev.get("recommendation_image") %>'  alt="" class="ri"/>    
+                        </a>
                     </div>
                     <div id="right-content">
                         <div id="name"><%= ev.get("recommendation_username") %></div>
-                        <div id="post-time">Posted on <%= ev.get("recommendation_date") %></div>
+                        <div id="post-time" onclick="window.open('http://www.nypost.com/p/entertainment/theater/mormon_conquest_twlCrNAUI2E2z4l2tOqAWM', '_self');">
+                            Posted on <%= ev.get("recommendation_date") %>
+                        </div>
                     </div>
                     <div id="description-rec"> <%= ev.get("recommendation_text") %>
                     </div>

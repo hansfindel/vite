@@ -1,5 +1,7 @@
-var api_host = "http://192.168.0.178:3000";
+//var api_host = "http://192.168.0.178:3000";
 //var api_host = "http://162.243.16.96";
+var api_host = "localhost:3000"
+
 //Models
 Event = Backbone.Model.extend();
 EventsList = Backbone.Collection.extend({
