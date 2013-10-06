@@ -111,6 +111,9 @@ window.DetailsView = Backbone.View.extend({
     template:_.template($('#details').html()),
 
     render:function (eventName) {
+        if(ev.get("id") == undefined){
+            app.navigate('#', {trigger: true}); 
+        }
         $(this.el).html(this.template(ev));
         return this;
     }
@@ -127,6 +130,9 @@ window.RecommendationsView = Backbone.View.extend({
     render: function (eventName) {
         console.log("ev: ", ev)
         var comments = recommendationCollection.filterById(ev.id).models || [];
+        if(comments===[]){
+            app.navigate('#details/<%= ev.get("id") %>/0', {trigger: true}); 
+        }
         console.log("recommendations: ", comments);
         $(this.el).html(this.template( {comments: comments} ));
         console.log("this <RecommendationsView>: ", this)
