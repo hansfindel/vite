@@ -206,6 +206,28 @@
 						/* added */
 						margin-bottom: 25px;
 			}
+			
+			.category-1-color{
+				color: #2468b7 !important;
+			}
+			.category-2-color{
+				color: #01a7a7 !important;
+			}
+			.category-3-color{
+				color: #308d22 !important;
+			}
+			.category-4-color{
+				color: #e89901 !important;
+			}
+			.category-5-color{
+				color: #bd000a !important;
+			}
+			.category-6-color{
+				color: #a1007c !important;
+			}
+			.category-7-color{
+				color: #6c3d97 !important;
+			}
 
 			#right-top {
 				

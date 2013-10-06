@@ -28,7 +28,7 @@
 
     <script type="text/template" id="home">
         <div id="header">
-            <a id="menu" href="#menu"></a>
+            <a id="menu" href="#menu" class="menu-link"></a>
             <h1 class="header-title">Upcoming</h1>
             <a id="notification" href=""></a>
         </div>
@@ -36,7 +36,6 @@
             <% if( prev ){ %>
                 <a href="#" onclick="swipeDown();"><div id="category-<%= prev.get('category') %>" ></div></a>
             <% } %>
-            <a href=""><div id="category-" ></div></a>
             <a href="#details/<%= ev.get('id') %>/0">
                 <div id="to-event-details">
                     <img src='<%= ev.get("image") %>' alt="">
@@ -72,11 +71,11 @@
                     <% }%>
                     <div id="details">
                         <div id="left-top">
-                            <div id="titulo">
+                            <div id="titulo" class="category-<%= ev.get('category')%>-color">
                                 <%= ev.get("title") %></div>
                         </div>
                         <div id="right-top">
-                            <div id="date"><%= ev.get("date") %> - <%= ev.get("time") %></div>
+                            <div id="date" class="category-<%= ev.get('category')%>-color"><%= ev.get("date") %> - <%= ev.get("time") %></div>
                             <div id="address"><%= ev.get("venue") %></div>
                         </div>
                         <div id="description" style="overflow:hidden; height:55px;" ><%= ev.get("description") %>
@@ -123,7 +122,6 @@
 
     <script type="text/template" id="details">
         <div id="header">
-
             <a href="#" class="back-link"></a>
             <h1 class="header-title">Event</h1>
             <a id="notification" href=""></a>
@@ -166,7 +164,7 @@
                     <% }%>
                     <div id="details" >
                         <div id="left-top">
-                            <div id="titulo"><%= ev.get("title") %></div>
+                            <div id="titulo" class="category-<%= ev.get('category') %>-color"><%= ev.get("title") %></div>
                         </div>
                         <div id="right-top">
                             <div id="date"><%= ev.get("date") %> - <%= ev.get("time") %></div>

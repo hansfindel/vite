@@ -11,6 +11,8 @@ EventsList = Backbone.Collection.extend({
     //return "/json/events.json";
 	return api_host + "/events.json";
     //return "http://162.243.16.96/events.json";
+	//return "http://162.243.16.96/events.json";
+	//return "http://outro.vitenow.com/events.json";
     },
   parse: function(response){
     //console.log("response: ", response)
@@ -51,6 +53,9 @@ recommendationCollection.fetch();
 //var SPLASH_TIME_OUT = 2000;
 var SPLASH_TIME_OUT = 500;
 
+//Swipe Var
+var swipeActive = false;
+
 //Views
 window.SplashView = Backbone.View.extend({
 	template:_.template($('#splash').html()),
@@ -77,7 +82,7 @@ window.HomeView = Backbone.View.extend({
         _.bindAll(this,'render','addOne');    
         //this.collection.fetch({dataType: "jsonp"});
         this.collection.fetch();
-        console.log("this.collection:", this.collection)
+        //console.log("this.collection:", this.collection)
         this.collection.bind('reset', this.addOne, eventCollection);
     },
 
@@ -176,12 +181,35 @@ window.ProfileView = Backbone.View.extend({
 
 //var homeView = new HomeView();
 
+/*
 window.swipeUp = function(){
     return app.home("slideup");
 }
 window.swipeDown = function(){
     return app.home("slidedown");
 }
+*/
+function swipeUp(){
+	if(swipeActive){
+		eventId--;
+	    if(eventId < 0){
+	    	eventId = 0;
+	    }else{
+	    	app.home('slideup');
+	    }
+	}
+};
+
+function swipeDown(){
+	if(swipeActive){
+		eventId++;
+		if(eventId > eventCollection.length - 1){
+			eventId = eventCollection.length - 1;
+		}else{
+			app.home('slidedown');
+		}
+	}	
+};
 
 var AppRouter = Backbone.Router.extend({
 
@@ -199,14 +227,28 @@ var AppRouter = Backbone.Router.extend({
             return false;
         });
         this.firstPage = true;
-        //eventCollection.fetch();
-
+        
+        if(typeof(Storage)!=="undefined"){
+    		if(localStorage.getItem('localEventStorage') !== null){
+    			console.log(localStorage.getItem('localEventStorage'));
+    			eventCollection = new EventsList(JSON.parse(localStorage.getItem('localEventStorage')));
+    		}
+		}
+        eventCollection.fetch({
+        	success: function(){
+        		if(typeof(Storage)!=="undefined"){
+	        		if(eventCollection.length > 0){
+	        			localStorage.setItem('localEventStorage',JSON.stringify(eventCollection));
+	        		}
+        		}
+        	}
+        });
     },
 
     //Controllers
     splash:function(){
     	this.changePage(new SplashView());
-    	
+    	swipeActive = false;
     	setTimeout(function(){
     		app.login();
         }, SPLASH_TIME_OUT);
@@ -217,6 +259,7 @@ var AppRouter = Backbone.Router.extend({
 			if(localStorage.alreadyLogged !== 'true'){
 				localStorage.alreadyLogged = 'true';
 				this.changePage(new LoginView(),'slide');
+				swipeActive = false;
 			}else{
 				app.home('slideleft');
 			}
@@ -233,19 +276,17 @@ var AppRouter = Backbone.Router.extend({
 
         if(transition == 'slideup'){
             this.changePage(new HomeView({ collection: eventCollection }),'slidedown');
-            eventId++;
         }
         else if (transition == 'slidedown'){
             this.changePage(new HomeView({ collection: eventCollection }),'slideup');
-            eventId--;
         }
         else if(transition == 'slideleft'){
         	this.changePage(new HomeView({ collection: eventCollection }),'slide');
         }
         else{
             this.changePage(new HomeView({ collection: eventCollection }),'slide',true);
-            //eventId++;
         }
+        swipeActive = true;
     },
 
 
@@ -255,7 +296,9 @@ var AppRouter = Backbone.Router.extend({
             this.changePage(new DetailsView(), 'slide',true);
         else
             this.changePage(new DetailsView(), 'slide');
+
         check_description();
+        swipeActive = false;
     },
 
     recommendations:function (eventDet, reverseTransition) {
@@ -264,6 +307,7 @@ var AppRouter = Backbone.Router.extend({
         //    this.changePage(new RecommendationsView(),'slide',true);
         //else
             this.changePage(new RecommendationsView(),'slide');
+        swipeActive = false;
     },
 
     changePage:function (page, pagetransition,reverse) {
@@ -278,7 +322,10 @@ var AppRouter = Backbone.Router.extend({
         else
             transition =  $.mobile.defaultPageTransition;   
         
-        $('nav#menu').mmenu();
+        $('nav#menu').mmenu({
+            configuration: {pageSelector: '> div[data-role="page"]:first'}
+        });
+
         if (this.firstPage) {
             transition = 'none';
             this.firstPage = false;
@@ -297,6 +344,8 @@ var AppRouter = Backbone.Router.extend({
 
 $(document).on("mobileinit", function(){
     $.mobile.changePage.defaults.allowSamePageTransition = true;
+	$.support.cors = true;
+	$.mobile.allowCrossDomainPages=true;
 });
 
 $(document).ready(function () {
@@ -315,16 +364,16 @@ $(document).ready(function () {
 
     $(document.body).touchwipe({
         wipeUp: function() {
-            eventId++;
-            app.home('slideup');
+            //eventId++;
+            //app.home('slideup');
+        	swipeUp();
         },
         wipeDown: function() {
-            eventId--;
-            app.home('slidedown');
+        	swipeDown();
         },
-        min_move_x: 20,
-        min_move_y: 20,
-        preventDefaultEvents: true
+        min_move_x: 15,
+        min_move_y: 15,
+        preventDefaultEvents: false
     });
 
     $(document).on('pageshow',function( e, ui ){
