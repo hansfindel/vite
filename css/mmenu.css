@@ -713,7 +713,8 @@ html.mm-no-overflowscrolling.mm-right .mm-menu
 	html.mm-left.mm-opening .mm-page,
 	html.mm-left.mm-opening #mm-blocker
 	{
-		left: 500px;
+		/*left: 500px;*/
+		left: 130px;
 	}
 	html.mm-right.mm-opening .mm-page,
 	html.mm-right.mm-opening #mm-blocker
