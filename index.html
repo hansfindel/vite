@@ -121,7 +121,9 @@
         <div data-role="content">
             <a href="">
                 <div id="to-event-details">
-                    <img src='<%= ev.get("image") %>' alt='<%= ev.get("title") %>'>
+                    <div class="image_container" style="overflow:hidden;">
+                        <img class="event_image" src='<%= ev.get("image") %>' alt='<%= ev.get("title") %>'>
+                    </div>
                     <% if(ev.get("category") == 1){%>
                         <div id="category-1" >
                             <div id="texto-categoria">ENTERTAINMENT</div>
@@ -206,8 +208,9 @@
                 var description_element = document.getElementById("description");
                 var scrollHeight = description_element.scrollHeight;
                 var height = $(description_element).height();
-                console.log(scrollHeight);
-                console.log(height);
+                var difference = scrollHeight - height;
+                //var to55 = scrollHeight + " 55px";
+                //var from55 = "55 " + scrollHeight + "px";
                 if(scrollHeight < height){ 
                     console.log("asdfafsasdfaf")
                     $("#description-more").text("");
@@ -215,12 +218,14 @@
                 }
                 $(".view_more").unbind("click");
                 $(".view_more").click(function(e){
-                    e.preventDefault();
+                    //e.preventDefault();
                     var link = $(this).children("a");
+                    h = $(".event_image").height();
                     if($(this).hasClass("more")){
                         $(this).removeClass("more");
                         $(this).addClass("less");
-                        $(this).html("Ver menos")
+                        $(this).html("Ver menos");
+                        h -= difference;
                         $("#description").css("height", "");
                     }
                     else{
@@ -229,6 +234,7 @@
                         $(this).html("Ver más")
                         $("#description").css("height", "55px");
                     }
+                    $(".image_container").css("height", h)
                     return false;
                 });
             }

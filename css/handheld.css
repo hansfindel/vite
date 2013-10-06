@@ -202,6 +202,9 @@
 						font-family: HelveticaNeueLTStd-Roman;
 						font: 25px/1 "HelveticaNeueLTStd-Roman";
 						color: #01a7a7;	
+						
+						/* added */
+						margin-bottom: 25px;
 			}
 
 			#right-top {
@@ -481,6 +484,12 @@
         	margin-bottom: 5%;
         	width: 25%;  	
         }      
+
+.image_container{
+	-webkit-transition: all .5s ease;
+       -moz-transition: all .5s ease;
+            transition: all .5s ease;
+}
 #description-more{
 	margin-top: -25px;
 }  
