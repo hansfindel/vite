@@ -18,9 +18,9 @@ EventsList = Backbone.Collection.extend({
     },
   parse: function(response){
     //console.log("response: ", response)
-    return response.Data;
+    //return response.Data;
     //return response;
-    //return response.events;
+    return response.events;
     }
 });
 
@@ -29,7 +29,7 @@ RecommendationsList = Backbone.Collection.extend({
   model: Recommendation,
   url: function(){
 	//return "http://162.243.16.96/recommendations.json";
-    return api_host + "/recommendations.json";
+    return api_host + "/recommendations";
     },
   parse: function(response){
     //return response.Data;
