@@ -1,6 +1,8 @@
-var api_host = "http://192.168.0.178:3000";
+var api_host = "http://outro.vitenow.com";
+//var api_host = "http://192.168.0.178:3000";
 //var api_host = "http://162.243.16.96";
 //var api_host = "localhost:3000"
+
 
 //Models
 Event = Backbone.Model.extend();
@@ -9,16 +11,16 @@ EventsList = Backbone.Collection.extend({
   url: function(){
     //return "/outro2/json/events.json";
     //return "/json/events.json";
-	return api_host + "/events.json";
+	return api_host + "/events";
     //return "http://162.243.16.96/events.json";
 	//return "http://162.243.16.96/events.json";
 	//return "http://outro.vitenow.com/events.json";
     },
   parse: function(response){
     //console.log("response: ", response)
-    //return response.Data;
+    return response.Data;
     //return response;
-    return response.events;
+    //return response.events;
     }
 });
 

@@ -76,7 +76,7 @@
                         </div>
                         <div id="right-top">
                             <div id="date" class="category-<%= ev.get('category')%>-color"><%= ev.get("date") %> - <%= ev.get("time") %></div>
-                            <div id="address"><%= ev.get("venue") %></div>
+                            <div id="address" class="category-<%= ev.get('category')%>-color"><%= ev.get("venue_text") %></div>
                         </div>
                         <div id="description" style="overflow:hidden; height:55px;" ><%= ev.get("description") %>
                     </div>
@@ -168,7 +168,7 @@
                         </div>
                         <div id="right-top">
                             <div id="date"><%= ev.get("date") %> - <%= ev.get("time") %></div>
-                            <div id="address"><%= ev.get("venue") %></div>
+                            <div id="address"><%= ev.get("venue_text") %></div>
                         </div>
                          <div id="description" style="overflow:hidden; height:55px;" >
                             <%= ev.get("description") %>
