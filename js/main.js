@@ -38,6 +38,12 @@ RecommendationsList = Backbone.Collection.extend({
       return recommendation.get("event_id") === event_id;
       });
     return new RecommendationsList(filtered);
+  },
+  filterByUserId: function(user_id) {
+    filtered = this.filter(function(recommendation) {
+      return recommendation.get("user_id") === user_id;
+      });
+    return new RecommendationsList(filtered);
   }
 });
 
@@ -215,7 +221,9 @@ window.ProfileView = Backbone.View.extend({
             console.log(us);
             app.navigate("#", {trigger: true})
         }        
-        $(this.el).html(this.template( {profile: us} ));
+        recommendations = recommendationCollection.filterByUserId(us.get("id"));
+        console.log("recommendations:", recommendations)
+        $(this.el).html(this.template( {profile: us, comments: recommendations.models} ));
         return this;
     }
 });

@@ -299,27 +299,44 @@
         <div data-role="content">   
             <div id="details">
                 <div class="profile_image_container">
-                    <img class="profile_image" src='<%= profile.get("image") %>' alt='<%= ev.get("title") %>'>
+                    <img class="profile_image" src='<%= us.get("image_url") %>' alt='<%= us.get("first_name") %>'>
                 </div>
-                <div id="left-top">
+                <div id="profile_info">
                     <div id="titulo" class="name">
-                        <%= profile.get('first_name') %> (nombre)
+                        <%= profile.get('first_name') %> <%= profile.get('last_name') %>
                     </div>
-                </div>
-                <div id="right-top">
                     <div class="links">
-                        <a href="">Recommendations</a>
+                        <a href="" class="selected">Recommended</a>
                         <a href="">Followers</a>
                         <a href="">Followees</a>
                     </div>
-                    <div id="date"><%= ev.get("date") %> - <%= ev.get("time") %></div>
-                    <div id="address"><%= ev.get("venue") %></div>
                 </div>
-                <div id="description" style="overflow:hidden; height:55px;" >
-                    <%= ev.get("description") %>
+                <div id="description" >
+                    <%= us.get("description") %>
                 </div>
             </div>
-            <hr noshade />
+
+            <% for(var i = 0; i < comments.length; i++){%> 
+                <div class="recommender" data-transition="fade" style="cursor: hand;">
+                    <div class="event">
+                        <a href="#">
+                            <img src="<%= comments[i].get('event_image') %>"  alt="Rec" class="recommendation_image"/>    
+                            <div class="event_title back-color-<%= comments[i].get('event_category') %>">
+                                <h2><%= comments[i].get('event_name') %></h2>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="event-recommendation">
+                        <div class="post-time color-<%= comments[i].get('event_category') %>" onclick="window.open('http://www.nypost.com/p/entertainment/theater/mormon_conquest_twlCrNAUI2E2z4l2tOqAWM', '_self');" >
+                            Posted on <%= comments[i].get('date') %> 
+                        </div>
+                        <div class="shares color-<%= comments[i].get('event_category') %>"> x Shares</div>
+                    </div>
+                    <div id="description-rec">
+                        <%= comments[i].get('text') %>
+                    </div>
+                </div>
+            <% } %>
 
         </div>
     </script>
