@@ -317,9 +317,9 @@
             </div>
 
             <% for(var i = 0; i < comments.length; i++){%> 
-                <div class="recommender" data-transition="fade" style="cursor: hand;">
-                    <div class="event">
-                        <a href="#">
+                <div class="recommender" data-transition="fade" style="cursor: hand;" >
+                    <div class="event" >
+                        <a href="#details/<%= comments[i].get('event_id')%>/0">
                             <img src="<%= comments[i].get('event_image') %>"  alt="Rec" class="recommendation_image"/>    
                             <div class="event_title back-color-<%= comments[i].get('event_category') %>">
                                 <h2><%= comments[i].get('event_name') %></h2>
