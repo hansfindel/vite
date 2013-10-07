@@ -306,9 +306,9 @@
                         <%= profile.get('first_name') %> <%= profile.get('last_name') %>
                     </div>
                     <div class="links">
-                        <a href="" class="selected">Recommended</a>
-                        <a href="">Followers</a>
-                        <a href="">Followees</a>
+                        <a href="#profile/<%= us.get(('id')) %>" class="selected">Recommended</a>
+                        <a href="#profile/<%= us.get(('id')) %>/followers">Followers</a>
+                        <a href="#profile/<%= us.get(('id')) %>/followees">Followees</a>
                     </div>
                 </div>
                 <div id="description" >
@@ -337,6 +337,39 @@
                     </div>
                 </div>
             <% } %>
+
+        </div>
+    </script>
+    <script type="text/template" id="follows">
+        <div id="header">
+            <a href="#profile/<%= us.get('id') %>" class="back-link"></a>
+            <h1 class="header-title"><%= title %></h1>
+            <a id="notification" href=""></a>
+        </div>
+        <div data-role="content">   
+            <div id="details">
+                <div class="profile_image_container">
+                    <img class="profile_image" src='<%= us.get("image_url") %>' alt='<%= us.get("first_name") %>'>
+                </div>
+                <div id="profile_info">
+                    <div id="titulo" class="name">
+                        <%= profile.get('first_name') %> <%= profile.get('last_name') %>
+                    </div>
+                    <div class="links">
+                        <a href="#profile/<%= us.get(('id')) %>" >Recommended</a>
+                        <a href="#profile/<%= us.get(('id')) %>/followers" class="<%= title == 'Followers' ? 'selected' : '' %>">
+                            Followers
+                        </a>
+                        <a href="#profile/<%= us.get(('id')) %>/followees"  class="<%= title == 'Followees' ? 'selected' : '' %>">
+                            Followees
+                        </a>
+                    </div>
+                </div>
+                <div id="description" >
+                    <%= us.get("description") %>
+                </div>
+            </div>
+
 
         </div>
     </script>

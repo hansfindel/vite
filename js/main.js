@@ -228,6 +228,38 @@ window.ProfileView = Backbone.View.extend({
     }
 });
 
+window.FollowersView = Backbone.View.extend({
+    template: _.template($('#follows').html()),
+    initialize: function(userid){
+        if(userCollection.models.length == 0){
+            userCollection.fetch();
+        }
+        us = userCollection.getById(userid);  
+    }, 
+    render: function () {
+        if(userCollection.models.length == 0 || us == undefined){
+            app.navigate("#", {trigger: true})
+        }        
+        $(this.el).html(this.template( {profile: us, follows: userCollection.models, title: "Followers"} ));
+        return this;
+    }
+});
+window.FolloweesView = Backbone.View.extend({
+    template: _.template($('#follows').html()),
+    initialize: function(userid){
+        if(userCollection.models.length == 0){
+            userCollection.fetch();
+        }
+        us = userCollection.getById(userid);  
+    }, 
+    render: function () {
+        if(userCollection.models.length == 0 || us == undefined){
+            app.navigate("#", {trigger: true})
+        }        
+        $(this.el).html(this.template( {profile: us, follows: userCollection.models, title: "Followees"} ));
+        return this;
+    }
+});
 //var homeView = new HomeView();
 
 /*
@@ -267,7 +299,9 @@ var AppRouter = Backbone.Router.extend({
         "home":"home",
         "details/:eventdet/:reverseTransition":"details",
         "recommendations/:eventdet/:reverseTransition":"recommendations", 
-        "profile/:userid":"profile"
+        "profile/:userid":"profile",
+        "profile/:userid/followees":"followees",
+        "profile/:userid/followers":"followers"
     },
 
     initialize:function () {
@@ -389,6 +423,12 @@ var AppRouter = Backbone.Router.extend({
         console.log('#profile');
 
         this.changePage(new ProfileView(userid),'slide');
+    },
+    followers: function(userid){
+        this.changePage(new FollowersView(userid),'slide');
+    },
+    followees: function(userid){
+        this.changePage(new FolloweesView(userid),'slide');
     }
 });
 
