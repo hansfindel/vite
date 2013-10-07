@@ -370,7 +370,40 @@
                 </div>
             </div>
 
-
+            <% for(var i = 0; i < follows.length; i++){%> 
+                <div class="follow-user" data-transition="fade" style="cursor: hand;">
+                    <div class="user <%= i%2==0 ? 'even' : 'odd' %> user_<%= i %>">
+                        <div class="user_image">                            
+                            <img src="<%= follows[i].get('image_url') %>"  alt="Rec" class="follow_user_image"/>    
+                        </div>
+                        <div class="event_title" onclick="raise_button(<%= i %>);" >
+                            <p><%= follows[i].get('first_name') %> <%= follows[i].get('last_name') %></p>
+                        </div>
+                        <% if( follows[i].get('followed') || (i%3==0) ) { %>
+                            <div class="following"> 
+                                <img src="/img/FollowingSmall.png"/>
+                            </div>
+                        <% }else{ %>
+                            <div class="follow_btn hidden">
+                                <img src="/img/Follow.png"/>
+                            </div>
+                        <% }%>
+                    </div>
+                </div>
+            <% } %>
+            <script type="text/javascript">
+                function raise_button(row_index){
+                    //console.log(row_index);
+                    var selector = ".user.user_"+row_index+ " .follow_btn";
+                    //toggle class
+                    if($(selector).hasClass("hidden")){
+                        $(selector).fadeIn("slow");
+                    }else{
+                        $(selector).fadeOut("slow");
+                    }
+                    $(selector).toggleClass("hidden");
+                }
+            </script>
         </div>
     </script>
 
