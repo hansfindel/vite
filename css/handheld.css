@@ -92,12 +92,9 @@
 		img {
 			width: 100%;
 			max-width: 100%;
-		}
 
-
-		img {
-			width: 100%;
-			max-width: 100%;
+			/* As in 'template' image */
+			max-height: 522px;
 		}
 
 
@@ -108,7 +105,7 @@
 		#category-1 {
 			position: relative;
 			background-color: #2468b7;
-			padding-top: 2%;
+			padding-top: 1.5%;
 			padding-bottom: 0.5%;
 			text-decoration: none
 		}
@@ -181,8 +178,7 @@
             background: transparent;       
             width: 100%;
             margin-bottom: 5%;
-            
-
+  
         }
 
 			#left-top {
@@ -355,6 +351,7 @@
             background: transparent;
             margin-top: 5%;
             width: 100%;
+            margin-bottom: 5%;
             
         }
 

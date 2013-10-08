@@ -246,6 +246,7 @@ window.ProfileView = Backbone.View.extend({
             console.log(userCollection)
             console.log(us);
             app.navigate("#", {trigger: true})
+            return; // so it doesnt throw errors
         }        
         recommendations = recommendationCollection.filterByUserId(us.get("id"));
         console.log("recommendations:", recommendations)
@@ -450,7 +451,7 @@ var AppRouter = Backbone.Router.extend({
             transition = 'none';
             this.firstPage = false;
         }
-        
+
         if(reverse)
             $.mobile.changePage($(page.el), {changeHash:false, transition: transition, reverse:true});
         else

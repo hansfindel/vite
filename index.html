@@ -84,7 +84,7 @@
              </a>
             <hr noshade />
             <% if(ev.get("recommendation_id") != null) {%>
-                <div id="recommender" data-transition="fade" style="cursor: hand;">
+                <div id="recommender" data-transition="fade">
                     <div id="left-content">
                         <a href="#profile/<%= ev.get('recommendation_user_id') %>">
                             <img src='<%= ev.get("recommendation_image") %>'  alt="" class="ri"/>    
@@ -106,9 +106,9 @@
         </div>
         <nav id="menu" >
             <ul>
-                <li class="center"><a href="index.html">Activity</a></li>
-                <li><a href="horizontal-submenus.html">Upcoming</a></li>
-                <li><a href="vertical-submenus.html">Feed</a></li>
+                <li class="center"><a href="#home">Activity</a></li>
+                <li><a href="#home">Upcoming</a></li>
+                <li><a href="#home">Feed</a></li>
                 <li class="center"><a href="#home">Browse</a></li>
                 <li><a href="#home/1">Entertainment</a></li>
                 <li><a href="#home/2">Cultural</a></li>
@@ -405,8 +405,8 @@
                     }
                     $(selector).toggleClass("hidden");
                 }
-                $( ".user .user_name" ).on( "swipe", function(){$(this).click()} );
- 
+                //$( ".user .user_name" ).on( "swipe", function(){ $(this).click(); return false; } );
+                $( ".user" ).on( "swipe", function(){ $(this).children(".user_name").click(); return false; })
             </script>
         </div>
     </script>
