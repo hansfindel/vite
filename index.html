@@ -373,8 +373,10 @@
             <% for(var i = 0; i < follows.length; i++){%> 
                 <div class="follow-user" data-transition="fade" style="cursor: hand;">
                     <div class="user <%= i%2==0 ? 'even' : 'odd' %> user_<%= i %>">
-                        <div class="user_image">                            
-                            <img src="<%= follows[i].get('image_url') %>"  alt="Rec" class="follow_user_image"/>    
+                        <div class="user_image">  
+                            <a href="#profile/<%= follows[i].get('id') %>">                          
+                                <img src="<%= follows[i].get('image_url') %>"  alt="Rec" class="follow_user_image"/>    
+                            </a>
                         </div>
                         <div class="event_title" onclick="raise_button(<%= i %>);" >
                             <p><%= follows[i].get('first_name') %> <%= follows[i].get('last_name') %></p>
