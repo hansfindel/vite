@@ -25,10 +25,10 @@ EventsList = Backbone.Collection.extend({
     },
   filterByCategoryId: function(category_id) {
     //tevent instaed of event, event reserved word
-    //console.log(category_id, typeof(category_id))
+    console.log(category_id, typeof(category_id))
     filtered = this.filter(function(tevent) {
-        //var cat = tevent.get("category");
-        //console.log(cat, typeof(cat))
+        var cat = tevent.get("category");
+        console.log(cat, typeof(cat))
         // number_type == string_type is valid
       return tevent.get("category") == category_id;
     });
@@ -141,14 +141,12 @@ window.HomeView = Backbone.View.extend({
         //console.log("#######HomeView#########")
         //console.log(this)
         //this.collection.fetch({dataType: "jsonp"});
-        this.collection.fetch();    
-        if(this.options.category){
-            console.log("category = ", this.options.category, typeof(this.options.category))
-            this.collection = this.collection.filterByCategoryId(this.options.category)
-        }
-        events = this.collection
+        
+        //this.collection.fetch();    
+        
         //console.log("this.collection:", this.collection)
-        this.collection.bind('reset', this.addOne, eventCollection);
+        //this.collection.bind('reset', this.addOne, eventCollection);
+        this.collection.bind('reset', this.addOne, events);
     },
 
     render:function () {
@@ -387,18 +385,19 @@ var AppRouter = Backbone.Router.extend({
     
     home:function (transition) {
         console.log('#home');
-
+        //var home_collection = eventCollection;
+        var home_collection = events;
         if(transition == 'slideup'){
-            this.changePage(new HomeView({ collection: eventCollection }),'slidedown');
+            this.changePage(new HomeView({ collection: home_collection }),'slidedown');
         }
         else if (transition == 'slidedown'){
-            this.changePage(new HomeView({ collection: eventCollection }),'slideup');
+            this.changePage(new HomeView({ collection: home_collection }),'slideup');
         }
         else if(transition == 'slideleft'){
-        	this.changePage(new HomeView({ collection: eventCollection }),'slide');
+        	this.changePage(new HomeView({ collection: home_collection }),'slide');
         }
         else{
-            this.changePage(new HomeView({ collection: eventCollection }),'slide',true);
+            this.changePage(new HomeView({ collection: home_collection }),'slide',true);
         }
         swipeActive = true;
     },
@@ -406,14 +405,15 @@ var AppRouter = Backbone.Router.extend({
         console.log("#home_category")
         //console.log(category_id)
         eventId = 0; //
-        this.changePage(new HomeView({ collection: eventCollection, category: category_id }),'slide',true);
+        events = eventCollection.filterByCategoryId(category_id)
+        this.changePage(new HomeView({ collection: events, category: category_id }),'slide',true);
         swipeActive = true;  
     },
 
     details:function (eventDet, reverseTransition) {
 
         if(reverseTransition == 1)
-            this.changePage(new DetailsView(), 'slide',true);
+            this.changePage(new DetailsView(), 'slide', true);
         else
             this.changePage(new DetailsView(), 'slide');
 
@@ -450,7 +450,7 @@ var AppRouter = Backbone.Router.extend({
             transition = 'none';
             this.firstPage = false;
         }
-
+        
         if(reverse)
             $.mobile.changePage($(page.el), {changeHash:false, transition: transition, reverse:true});
         else
