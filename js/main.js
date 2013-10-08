@@ -387,7 +387,7 @@ var AppRouter = Backbone.Router.extend({
     },
 
     recommendations:function (eventDet, reverseTransition) {
-        console.log('#recommendations');
+        //console.log('#recommendations');
         //if(reverseTransition ==1)
         //    this.changePage(new RecommendationsView(),'slide',true);
         //else
@@ -425,12 +425,15 @@ var AppRouter = Backbone.Router.extend({
         console.log('#profile');
 
         this.changePage(new ProfileView(userid),'slide');
+        swipeActive = false;
     },
     followers: function(userid){
         this.changePage(new FollowersView(userid),'slide');
+        swipeActive = false;
     },
     followees: function(userid){
         this.changePage(new FolloweesView(userid),'slide');
+        swipeActive = false;
     }
 });
 
