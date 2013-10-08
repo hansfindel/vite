@@ -378,7 +378,7 @@
                                 <img src="<%= follows[i].get('image_url') %>"  alt="Rec" class="follow_user_image"/>    
                             </a>
                         </div>
-                        <div class="event_title" onclick="raise_button(<%= i %>);" >
+                        <div class="user_name" onclick="raise_button(<%= i %>);" >
                             <p><%= follows[i].get('first_name') %> <%= follows[i].get('last_name') %></p>
                         </div>
                         <% if( follows[i].get('followed') || (i%3==0) ) { %>
@@ -405,6 +405,8 @@
                     }
                     $(selector).toggleClass("hidden");
                 }
+                $( ".user .user_name" ).on( "swipe", function(){$(this).click()} );
+ 
             </script>
         </div>
     </script>
