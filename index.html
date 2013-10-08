@@ -34,7 +34,7 @@
         </div>
         <div data-role="content">
             <% if( prev ){ %>
-                <a href="#" onclick="swipeDown();"><div id="category-<%= prev.get('category') %>" ></div></a>
+                <a href="#" onclick="swipeUp();"><div id="category-<%= prev.get('category') %>" ></div></a>
             <% } %>
             <a href="#details/<%= ev.get('id') %>/0">
                 <div id="to-event-details">
@@ -101,7 +101,7 @@
                 </div>
             <% }%>
             <% if( next ){%>
-                <a href="#" onclick="swipeUp();"><div id="category-<%= next.get('category') %>" ></div></a>
+                <a href="#" onclick="swipeDown();"><div id="category-<%= next.get('category') %>" ></div></a>
             <% } %>
         </div>
         <nav id="menu" >

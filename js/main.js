@@ -1,7 +1,7 @@
-var api_host = "http://outro.vitenow.com";
+//var api_host = "http://outro.vitenow.com";
 //var api_host = "http://192.168.0.178:3000";
 //var api_host = "http://162.243.16.96";
-//var api_host = "localhost:3000"
+var api_host = "localhost:3000"
 
 
 //Models
@@ -198,7 +198,7 @@ window.RecommendationsView = Backbone.View.extend({
         }
         var comments = recommendationCollection.filterById(ev.id).models || [];
         if(comments.length == 0){
-            app.navigate('#details/<%= ev.get("id") %>/0', {trigger: true}); 
+            app.navigate("#details/<%= ev.get('id') %>/0", {trigger: true}); 
         }
         //console.log("recommendations: ", comments);
         $(this.el).html(this.template( {comments: comments} ));
