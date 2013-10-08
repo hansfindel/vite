@@ -561,3 +561,6 @@
 .back-color-7{
 	background-color: #6c3d97;
 }
+.category_swipe{
+	cursor: pointer;
+}

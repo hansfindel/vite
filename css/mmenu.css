@@ -413,6 +413,12 @@ html.mm-blocking #mm-blocker
 	background: rgba( 0, 0, 0, 0.2 );
 
 }
+ul.mm-opened li:hover, .mm-menu li > a:hover
+{
+	background: rgba( 0, 0, 0, 0.1 );
+	cursor: pointer;
+}
+
 .mm-menu li.mm-selected > a.mm-subopen
 {
 	background: transparent;
