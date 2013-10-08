@@ -1,7 +1,7 @@
 //var api_host = "http://outro.vitenow.com";
-//var api_host = "http://192.168.0.178:3000";
+var api_host = "http://192.168.0.178:3000";
 //var api_host = "http://162.243.16.96";
-var api_host = "localhost:3000"
+//var api_host = "localhost:3000"
 
 
 //Models
@@ -11,9 +11,9 @@ EventsList = Backbone.Collection.extend({
   url: function(){
     //return "/outro2/json/events.json";
     //return "/json/events.json";
-	return api_host + "/events";
+	//return api_host + "/events";
+    return api_host + "/events.json";
     //return "http://162.243.16.96/events.json";
-	//return "http://162.243.16.96/events.json";
 	//return "http://outro.vitenow.com/events.json";
     },
   parse: function(response){
@@ -29,7 +29,8 @@ RecommendationsList = Backbone.Collection.extend({
   model: Recommendation,
   url: function(){
 	//return "http://162.243.16.96/recommendations.json";
-    return api_host + "/recommendations";
+    //return api_host + "/recommendations";
+    return api_host + "/recommendations.json";
     },
   parse: function(response){
     //return response.Data;
@@ -198,6 +199,7 @@ window.RecommendationsView = Backbone.View.extend({
         }
         var comments = recommendationCollection.filterById(ev.id).models || [];
         if(comments.length == 0){
+            console.log("comments length == 0")
             app.navigate("#details/<%= ev.get('id') %>/0", {trigger: true}); 
         }
         //console.log("recommendations: ", comments);
