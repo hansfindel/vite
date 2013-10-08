@@ -1,5 +1,6 @@
 //var api_host = "http://outro.vitenow.com";
-var api_host = "http://192.168.0.178:3000";
+//var api_host = "http://192.168.0.178:3000";
+var api_host = "http://192.168.1.101:3000";
 //var api_host = "http://162.243.16.96";
 //var api_host = "localhost:3000"
 
@@ -21,7 +22,18 @@ EventsList = Backbone.Collection.extend({
     //return response.Data;
     //return response;
     return response.events;
-    }
+    },
+  filterByCategoryId: function(category_id) {
+    //tevent instaed of event, event reserved word
+    //console.log(category_id, typeof(category_id))
+    filtered = this.filter(function(tevent) {
+        //var cat = tevent.get("category");
+        //console.log(cat, typeof(cat))
+        // number_type == string_type is valid
+      return tevent.get("category") == category_id;
+    });
+    return new EventsList(filtered);
+  }
 });
 
 Recommendation = Backbone.Model.extend();
@@ -85,6 +97,9 @@ UsersList = Backbone.Collection.extend({
 var ev = new Event;
 var eventId = 0;
 var eventCollection = new EventsList;
+eventCollection.fetch(); 
+var events = eventCollection;
+
 var recommendationCollection = new RecommendationsList;
 recommendationCollection.fetch(); 
 var us = new User;
@@ -123,26 +138,35 @@ window.HomeView = Backbone.View.extend({
     //model: Event, 
     initialize:function() {
         _.bindAll(this,'render','addOne');    
+        //console.log("#######HomeView#########")
+        //console.log(this)
         //this.collection.fetch({dataType: "jsonp"});
-        this.collection.fetch();
+        this.collection.fetch();    
+        if(this.options.category){
+            console.log("category = ", this.options.category, typeof(this.options.category))
+            this.collection = this.collection.filterByCategoryId(this.options.category)
+        }
+        events = this.collection
         //console.log("this.collection:", this.collection)
         this.collection.bind('reset', this.addOne, eventCollection);
     },
 
     render:function () {
         console.log("this.collection.length: ", this.collection.length);
+        console.log("this.collection: ", this.collection);
         console.log("Evento: " + eventId);
+        var collection = this.collection;
         var prev, next;
-        if(eventCollection.length > 0){
-            ev   = eventCollection.at(eventId);
+        if(collection.length > 0){
+            ev   = collection.at(eventId);
             if(eventId > 0){
-                prev = eventCollection.at(eventId - 1);    
+                prev = collection.at(eventId - 1);    
             }
             else{
                 prev = undefined;
             }
-            if(eventId < eventCollection.length){
-                next = eventCollection.at(eventId + 1);
+            if(eventId < collection.length){
+                next = collection.at(eventId + 1);
             }
             else{
                 next = undefined;
@@ -153,9 +177,9 @@ window.HomeView = Backbone.View.extend({
             console.log('ev es null');
             $(this.el).html(this.template());
         }else{
-            console.log('ev tiene modelo');
-            console.log(ev);
-            console.log(ev.toJSON());
+            //console.log('ev tiene modelo');
+            //console.log(ev);
+            //console.log(ev.toJSON());
             $(this.el).html( this.template({ev: ev, prev: prev, next: next}) );
         }
         
@@ -163,9 +187,9 @@ window.HomeView = Backbone.View.extend({
     },
 
     addOne: function () {
-        console.log("homeView addone:")
+        //console.log("homeView addone:")
         this.render();
-        console.log("/homeView addone")
+        //console.log("/homeView addone")
     }
 
 });
@@ -288,8 +312,10 @@ function swipeUp(){
 function swipeDown(){
 	if(swipeActive){
 		eventId++;
-		if(eventId > eventCollection.length - 1){
-			eventId = eventCollection.length - 1;
+        // events instead of eventCollection
+        // events is the current set of events, filtered or not
+		if(eventId > events.length - 1){
+			eventId = events.length - 1;
 		}else{
 			app.home('slidedown');
 		}
@@ -301,6 +327,7 @@ var AppRouter = Backbone.Router.extend({
     routes:{
         "":"splash",
         "home":"home",
+        "home/:categorydet":"home_category",
         "details/:eventdet/:reverseTransition":"details",
         "recommendations/:eventdet/:reverseTransition":"recommendations", 
         "profile/:userid":"profile",
@@ -375,7 +402,13 @@ var AppRouter = Backbone.Router.extend({
         }
         swipeActive = true;
     },
-
+    home_category: function(category_id){
+        console.log("#home_category")
+        //console.log(category_id)
+        eventId = 0; //
+        this.changePage(new HomeView({ collection: eventCollection, category: category_id }),'slide',true);
+        swipeActive = true;  
+    },
 
     details:function (eventDet, reverseTransition) {
 
