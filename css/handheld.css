@@ -561,3 +561,9 @@
 .category_swipe{
 	cursor: pointer;
 }
+.category_swipe.end_of_page, .end_of_page{
+	position: absolute !important;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}

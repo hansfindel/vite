@@ -106,7 +106,8 @@
                 </div>
             <% }%>
             <% if( next ){%>
-                <div id="category-<%= next.get('category') %>" class="category_swipe" onclick="swipeDown();"></div>
+                <div id="category-<%= next.get('category') %>" class="category_swipe end_of_page" onclick="swipeDown();">
+                </div>
             <% } %>
         </div>
         <nav id="menu" >
