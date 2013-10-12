@@ -25,10 +25,10 @@ EventsList = Backbone.Collection.extend({
     },
   filterByCategoryId: function(category_id) {
     //tevent instaed of event, event reserved word
-    console.log(category_id, typeof(category_id))
+    //console.log(category_id, typeof(category_id))
     filtered = this.filter(function(tevent) {
-        var cat = tevent.get("category");
-        console.log(cat, typeof(cat))
+        //var cat = tevent.get("category");
+        //console.log(cat, typeof(cat))
         // number_type == string_type is valid
       return tevent.get("category") == category_id;
     });
@@ -298,7 +298,7 @@ window.swipeDown = function(){
 }
 */
 function swipeUp(){
-	if(swipeActive){
+	if(swipeActive){ 
 		eventId--;
 	    if(eventId < 0){
 	    	eventId = 0;
@@ -309,7 +309,7 @@ function swipeUp(){
 };
 
 function swipeDown(){
-	if(swipeActive){
+	if(swipeActive){ 
 		eventId++;
         // events instead of eventCollection
         // events is the current set of events, filtered or not
@@ -403,7 +403,7 @@ var AppRouter = Backbone.Router.extend({
         swipeActive = true;
     },
     home_category: function(category_id){
-        console.log("#home_category")
+        //console.log("#home_category")
         //console.log(category_id)
         eventId = 0; //
         events = eventCollection.filterByCategoryId(category_id)
@@ -458,7 +458,7 @@ var AppRouter = Backbone.Router.extend({
             $.mobile.changePage($(page.el), {changeHash:false, transition: transition});
     },
     profile: function(userid){
-        console.log('#profile');
+        //console.log('#profile');
 
         this.changePage(new ProfileView(userid),'slide');
         swipeActive = false;
@@ -480,7 +480,7 @@ $(document).on("mobileinit", function(){
 });
 
 $(document).ready(function () {
-    console.log('document ready');
+    //console.log('document ready');
     app = new AppRouter();
     Backbone.history.start();
 
