@@ -69,16 +69,20 @@
                             <div id="texto-categoria">SOCIAL LIFE</div>
                         </div>
                     <% }%>
-                    <div id="details">
+                    <div id="details" >
                         <div id="left-top">
                             <div id="titulo" class="category-<%= ev.get('category')%>-color">
-                                <%= ev.get("title") %></div>
+                                <%= ev.get("title") %>
+                            </div>
                         </div>
                         <div id="right-top">
-                            <div id="date" class="category-<%= ev.get('category')%>-color"><%= ev.get("date") %> - <%= ev.get("time") %></div>
-                            <div id="address" class="category-<%= ev.get('category')%>-color"><%= ev.get("venue_text") %></div>
+                            <div id="date" class="category-<%= ev.get('category')%>-color">
+                                <%= ev.get("date") %> - <%= ev.get("time") %>
+                            </div>
+                            <div id="address" class="category-<%= ev.get('category')%>-color">
+                                <%= ev.get("venue_text") %>
+                            </div>
                         </div>
-                        <div id="description" style="overflow:hidden; height:55px;" ><%= ev.get("description") %>
                     </div>
                 </div>
              </a>
@@ -96,7 +100,8 @@
                             Posted on <%= ev.get("recommendation_date") %>
                         </div>
                     </div>
-                    <div id="description-rec"> <%= ev.get("recommendation_text") %>
+                    <div id="description-rec"> 
+                        <%= ev.get("recommendation_text") %>
                     </div>
                 </div>
             <% }%>

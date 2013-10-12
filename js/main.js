@@ -1,6 +1,6 @@
 //var api_host = "http://outro.vitenow.com";
-//var api_host = "http://192.168.0.178:3000";
-var api_host = "http://192.168.1.101:3000";
+var api_host = "http://192.168.0.178:3000";
+//var api_host = "http://192.168.1.101:3000";
 //var api_host = "http://162.243.16.96";
 //var api_host = "localhost:3000"
 
