@@ -38,7 +38,9 @@
             <% } %>
             <a href="#details/<%= ev.get('id') %>/0">
                 <div id="to-event-details">
-                    <img src='<%= ev.get("image") %>' alt="">
+                    <div class="home_image_container">
+                       <img src='<%= ev.get("image") %>' alt="">
+                    </div>
                     <% if(ev.get("category") == 1){%>
                         <div id="category-1">
                             <div id="texto-categoria">ENTERTAINMENT</div>
@@ -69,7 +71,7 @@
                             <div id="texto-categoria">SOCIAL LIFE</div>
                         </div>
                     <% }%>
-                    <div id="details" >
+                    <div id="details" style="max-height: 70px;">
                         <div id="left-top">
                             <div id="titulo" class="category-<%= ev.get('category')%>-color">
                                 <%= ev.get("title") %>
@@ -181,7 +183,7 @@
                             <div id="date"><%= ev.get("date") %> - <%= ev.get("time") %></div>
                             <div id="address"><%= ev.get("venue_text") %></div>
                         </div>
-                         <div id="description" style="overflow:hidden; height:55px;" >
+                         <div id="description" style="overflow:hidden; height:65px;" >
                             <%= ev.get("description") %>
                         </div>
                     </div>
@@ -189,7 +191,7 @@
                         
                 <div id="description-more">
                     <a class="view_more more color-<%=ev.get('category')%>">
-                        Ver más
+                        Ver más 
                     </a>
                 </div>
                 <div id="action">
@@ -259,7 +261,7 @@
                         $(this).addClass("more");
                         $(this).removeClass("less");
                         $(this).html("Ver más")
-                        $("#description").css("height", "55px");
+                        $("#description").css("height", "65px");
                     }
                     $(".image_container").css("height", h)
                     return false;

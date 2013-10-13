@@ -569,3 +569,17 @@
 	left: 0px;
 	right: 0px;
 }
+
+/* Setting of images containers height on home */
+@media(max-height: 1280px){
+	.home_image_container{ 
+		max-height: 400px;
+		overflow: hidden;
+	}	
+}
+@media(max-height: 850px){
+	.home_image_container{ 
+		max-height:350px;
+		overflow: hidden;
+	}	
+}
