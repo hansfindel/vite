@@ -352,7 +352,7 @@
                         <div class="post-time color-<%= comments[i].get('event_category') %>" onclick="window.open('http://www.nypost.com/p/entertainment/theater/mormon_conquest_twlCrNAUI2E2z4l2tOqAWM', '_self');" >
                             Posted on <%= comments[i].get('date') %> 
                         </div>
-                        <div class="shares color-<%= comments[i].get('event_category') %>"> x Shares</div>
+                        <div class="shares color-<%= comments[i].get('event_category') %>"> <%= recommendationCollection.shareCount(comments[i].get('event_id')) %> Shares</div>
                     </div>
                     <div id="description-rec">
                         <%= comments[i].get('text') %>

@@ -6,7 +6,7 @@ var api_host = "http://192.168.0.178:3000";
 
 
 //Models
-Event = Backbone.Model.extend();
+Event = Backbone.Model.extend({});
 EventsList = Backbone.Collection.extend({
   model: Event,
   url: function(){
@@ -36,7 +36,7 @@ EventsList = Backbone.Collection.extend({
   }
 });
 
-Recommendation = Backbone.Model.extend();
+Recommendation = Backbone.Model.extend({});
 RecommendationsList = Backbone.Collection.extend({
   model: Recommendation,
   url: function(){
@@ -59,7 +59,14 @@ RecommendationsList = Backbone.Collection.extend({
       return recommendation.get("user_id") === user_id;
       });
     return new RecommendationsList(filtered);
+  },
+  shareCount: function(event_id){
+    filtered = this.filter(function(recommendation) {
+        return recommendation.get("event_id") == event_id;
+    });
+    return filtered.length;
   }
+
 });
 
 User = Backbone.Model.extend({
