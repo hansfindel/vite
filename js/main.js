@@ -62,7 +62,10 @@ RecommendationsList = Backbone.Collection.extend({
   }
 });
 
-User = Backbone.Model.extend();
+User = Backbone.Model.extend({
+    followersCount: function(){return this.get("followers").length},
+    followeesCount: function(){return this.get("followees").length}
+});
 UsersList = Backbone.Collection.extend({
   model: User,
   url: function(){

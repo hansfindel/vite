@@ -320,8 +320,12 @@
                     </div>
                     <div class="links">
                         <a href="#profile/<%= us.get(('id')) %>" class="selected">Recommended</a>
-                        <a href="#profile/<%= us.get(('id')) %>/followers">Followers</a>
-                        <a href="#profile/<%= us.get(('id')) %>/followees">Followees</a>
+                        <a href="#profile/<%= us.get(('id')) %>/followers">
+                            <p><%= us.followersCount() %> <span>Followers</span></p>
+                        </a>
+                        <a href="#profile/<%= us.get(('id')) %>/followees">
+                            <p><%= us.followeesCount() %> <span>Followees</span> </p>
+                        </a>
                     </div>
                 </div>
                 <div id="description" >
