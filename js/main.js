@@ -79,16 +79,35 @@ UsersList = Backbone.Collection.extend({
       return current_user.get("id") == uid;
     });
     return users[0];
-  }
-  /*
-  follows: function(event_id) {
-    filtered = this.filter(function(recommendation) {
-      return recommendation.get("event_id") === event_id;
-      });
+  },
+  follows: function(user) {
+    list = user.get("followees");
+    //filtered = this.filter(function(follow) {
+    //  return follow.get("event_id") === user_id;
+    //  });
+    filtered = list.map(function(element_id){
+        this.find(function(user){
+            if(user.get("id") == element_id){
+                return user;
+            }
+        })
+    })
     return new RecommendationsList(filtered);
   },
-  following: function(){}
-  */
+  following: function(user){
+    list = user.get("followers");
+    //filtered = this.filter(function(follow) {
+    //  return follow.get("event_id") === user_id;
+    //  });
+    filtered = list.map(function(element_id){
+        this.find(function(user){
+            if(user.get("id") == element_id){
+                return user;
+            }
+        })
+    })
+    return new RecommendationsList(filtered);
+  }
 
 });
 
