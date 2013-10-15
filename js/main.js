@@ -64,7 +64,8 @@ RecommendationsList = Backbone.Collection.extend({
 
 User = Backbone.Model.extend({
     followersCount: function(){return this.get("followers").length},
-    followeesCount: function(){return this.get("followees").length}
+    followeesCount: function(){return this.get("followees").length}, 
+    recommendationCount: function(){return recommendationCollection.filterByUserId(this.get("id")).length ;} // can be optimized
 });
 UsersList = Backbone.Collection.extend({
   model: User,
@@ -83,33 +84,31 @@ UsersList = Backbone.Collection.extend({
     });
     return users[0];
   },
-  follows: function(user) {
+  followed_by: function(user) {
     list = user.get("followees");
-    //filtered = this.filter(function(follow) {
-    //  return follow.get("event_id") === user_id;
-    //  });
-    filtered = list.map(function(element_id){
-        this.find(function(user){
-            if(user.get("id") == element_id){
-                return user;
-            }
-        })
-    })
-    return new RecommendationsList(filtered);
+    filtered = this.filter(function(follow) {
+      if( list.indexOf( follow.get("id") ) > -1 ){
+        return follow;
+      }
+    });
+    //console.log("filtered ", filtered);
+    return new UsersList(filtered);
   },
   following: function(user){
     list = user.get("followers");
-    //filtered = this.filter(function(follow) {
-    //  return follow.get("event_id") === user_id;
-    //  });
-    filtered = list.map(function(element_id){
-        this.find(function(user){
-            if(user.get("id") == element_id){
-                return user;
-            }
-        })
-    })
-    return new RecommendationsList(filtered);
+    filtered = this.filter(function(follow) {
+      if( list.indexOf( follow.get("id") ) > -1 ){
+        return follow;
+      }
+    });
+    //filtered = list.map(function(element_id){
+    //    this.find(function(user){
+    //        if(user.get("id") == element_id){
+    //            return user;
+    //        }
+    //    })
+    //})
+    return new UsersList(filtered);
   }
 
 });
@@ -271,7 +270,7 @@ window.ProfileView = Backbone.View.extend({
             return; // so it doesnt throw errors
         }        
         recommendations = recommendationCollection.filterByUserId(us.get("id"));
-        console.log("recommendations:", recommendations)
+        //console.log("recommendations:", recommendations)
         $(this.el).html(this.template( {profile: us, comments: recommendations.models} ));
         return this;
     }
@@ -289,7 +288,7 @@ window.FollowersView = Backbone.View.extend({
         if(userCollection.models.length == 0 || us == undefined){
             app.navigate("#", {trigger: true})
         }        
-        $(this.el).html(this.template( {profile: us, follows: userCollection.models, title: "Followers"} ));
+        $(this.el).html(this.template( {profile: us, follows: userCollection.followed_by(us).models, title: "Followers"} ));
         return this;
     }
 });
@@ -305,7 +304,7 @@ window.FolloweesView = Backbone.View.extend({
         if(userCollection.models.length == 0 || us == undefined){
             app.navigate("#", {trigger: true})
         }        
-        $(this.el).html(this.template( {profile: us, follows: userCollection.models, title: "Followees"} ));
+        $(this.el).html(this.template( {profile: us, follows: userCollection.following(us).models , title: "Followees"} ));
         return this;
     }
 });
