@@ -408,13 +408,13 @@
                         <div class="user_name" onclick="raise_button(<%= i %>);" >
                             <p><%= follows[i].get('first_name') %> <%= follows[i].get('last_name') %></p>
                         </div>
-                        <% if( follows[i].get('followed') || (i%3==0) ) { %>
+                        <% if( follows[i].is_followed_by( current_user ) ) { %>
                             <div class="following"> 
                                 <img src="/img/FollowingSmall.png"/>
                             </div>
                         <% }else{ %>
                             <div class="follow_btn hidden">
-                                <img src="/img/Follow.png"/>
+                                <!-- <img src="/img/Follow.png"/> -->
                             </div>
                         <% }%>
                     </div>
