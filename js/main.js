@@ -362,6 +362,7 @@ var AppRouter = Backbone.Router.extend({
     routes:{
         "":"splash",
         "home":"home",
+        "menu":"splash",
         "home/:categorydet":"home_category",
         "details/:eventdet/:reverseTransition":"details",
         "recommendations/:eventdet/:reverseTransition":"recommendations", 
