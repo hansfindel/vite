@@ -378,12 +378,17 @@
                         <%= profile.get('first_name') %> <%= profile.get('last_name') %>
                     </div>
                     <div class="links">
-                        <a href="#profile/<%= us.get(('id')) %>" >Recommended</a>
-                        <a href="#profile/<%= us.get(('id')) %>/followers" class="<%= title == 'Followers' ? 'selected' : '' %>">
-                            Followers
+                        <a href="#profile/<%= us.get(('id')) %>">
+                            <p>
+                                <%= us.recommendationCount() %>
+                                <span>Recommended</span>
+                            </p> 
                         </a>
-                        <a href="#profile/<%= us.get(('id')) %>/followees"  class="<%= title == 'Followees' ? 'selected' : '' %>">
-                            Followees
+                        <a href="#profile/<%= us.get(('id')) %>/followers" class="<%= title == 'Followers' ? 'selected' : '' %>" >
+                            <p><%= us.followersCount() %> <span>Followers</span></p>
+                        </a>
+                        <a href="#profile/<%= us.get(('id')) %>/followees" class="<%= title == 'Followers' ? 'selected' : '' %>">
+                            <p><%= us.followeesCount() %> <span>Followees</span> </p>
                         </a>
                     </div>
                 </div>

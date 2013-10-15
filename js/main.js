@@ -85,7 +85,7 @@ UsersList = Backbone.Collection.extend({
     return users[0];
   },
   followed_by: function(user) {
-    list = user.get("followees");
+    list = user.get("followers");
     filtered = this.filter(function(follow) {
       if( list.indexOf( follow.get("id") ) > -1 ){
         return follow;
@@ -95,7 +95,7 @@ UsersList = Backbone.Collection.extend({
     return new UsersList(filtered);
   },
   following: function(user){
-    list = user.get("followers");
+    list = user.get("followess");
     filtered = this.filter(function(follow) {
       if( list.indexOf( follow.get("id") ) > -1 ){
         return follow;
