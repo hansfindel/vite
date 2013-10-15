@@ -92,7 +92,7 @@ UsersList = Backbone.Collection.extend({
     return users[0];
   },
   followed_by: function(user) {
-    list = user.get("followers");
+    list = user.get("followers") || [];
     filtered = this.filter(function(follow) {
       if( list.indexOf( follow.get("id") ) > -1 ){
         return follow;
@@ -102,7 +102,7 @@ UsersList = Backbone.Collection.extend({
     return new UsersList(filtered);
   },
   following: function(user){
-    list = user.get("followess");
+    list = user.get("followees") || [];
     filtered = this.filter(function(follow) {
       if( list.indexOf( follow.get("id") ) > -1 ){
         return follow;
@@ -178,9 +178,9 @@ window.HomeView = Backbone.View.extend({
     },
 
     render:function () {
-        console.log("this.collection.length: ", this.collection.length);
-        console.log("this.collection: ", this.collection);
-        console.log("Evento: " + eventId);
+        //console.log("this.collection.length: ", this.collection.length);
+        //console.log("this.collection: ", this.collection);
+        //console.log("Evento: " + eventId);
         var collection = this.collection;
         var prev, next;
         if(collection.length > 0){
@@ -266,13 +266,13 @@ window.ProfileView = Backbone.View.extend({
         if(userCollection.models.length == 0){
             userCollection.fetch();
         }
-        console.log(userid)
+        //console.log(userid)
         us = userCollection.getById(userid);  
     }, 
     render: function () {
         if(userCollection.models.length == 0 || us == undefined){
-            console.log(userCollection)
-            console.log(us);
+            //console.log(userCollection)
+            //console.log(us);
             app.navigate("#", {trigger: true})
             return; // so it doesnt throw errors
         }        
@@ -413,7 +413,7 @@ var AppRouter = Backbone.Router.extend({
     },
     
     home:function (transition) {
-        console.log('#home');
+        //console.log('#home');
         //var home_collection = eventCollection;
         var home_collection = events;
         if(transition == 'slideup'){
