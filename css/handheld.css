@@ -566,6 +566,18 @@
        -moz-transition: all .5s ease;
             transition: all .5s ease;
 }
+#description, #action{
+	-webkit-transition: all .5s ease;
+       -moz-transition: all .5s ease;
+            transition: all .5s ease;
+
+	min-height: 0px; 
+	height: 0px;	
+	overflow: hidden;
+
+	display: none;
+	/*visibility: hidden; */
+}
 .category_swipe.end_of_page, .end_of_page{
 	position: absolute !important;
 	bottom: 0px;

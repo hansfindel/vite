@@ -569,9 +569,14 @@ function feed_to_event_menu(){
     $("nav#menu").remove()
     //link.removeAttr("id")
 
-    link.bind("click", function(){event_to_feed_menu(); return false;} )
+    link.bind("click", function(){
+        event_to_feed_menu(); 
+        link.unbind("click")
+        return false;
+    } )
     
     toggleCategorySwipe()
+    toggleDescription()
     //$(".category_swipe").fadeOut("slow")
     //<a id="menu" href="#menu" class="menu-link"></a> -> href="#home" class="back-link"
 }
@@ -587,6 +592,7 @@ function event_to_feed_menu(){
     //link.removeAttr("id")
     //$(".category_swipe").fadeIn("slow")
     toggleCategorySwipe()
+    toggleDescription()
     swipeActive = true;    
 }
 function toggleCategorySwipe(){
@@ -600,5 +606,33 @@ function toggleCategorySwipe(){
         //swipes.css("padding-bottom", "0.5%")
         swipes.css("padding-top", "")
         swipes.css("padding-bottom", "")
+    }
+}
+function toggleDescription(){
+    if(swipeActive){
+        // from feed to event
+        $("#description").css("display", "block");
+        $("#action").css("display", "block");
+        //$("#description").fadeIn();
+        //$("#action").fadeIn();
+        //$("#description").css("visibility", "visible");
+        //$("#action").css("visibility", "visible");
+        $("#description").css("height", "auto");
+        $("#action").css("height", "auto");
+        $("div#details").css("max-height", "")
+        $("div#details").css("height", "")
+    }
+    else{
+        // from event to feed
+        $("#description").css("display", "none");
+        $("#action").css("display", "none");
+        //$("#description").fadeOut();
+        //$("#action").fadeOut();
+        //$("#description").css("visibility", "hidden");
+        //$("#action").css("visibility", "hidden");
+        $("#description").css("height", "0px");
+        $("#action").css("height", "0px");
+        $("div#details").css("max-height", "70px")
+        $("div#details").css("height", "70px")
     }
 }

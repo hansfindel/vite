@@ -85,10 +85,23 @@
                                 <%= ev.get("venue_text") %>
                             </div>
                         </div>
+                        <div id="description">
+                            <%= ev.get("description") %>
+                        </div>
+                        <div id="action">
+                            <div id='left'>
+                                <a href=""><img src="img/tickets<%= ev.get('category') %>.png"/></a> 
+                            </div>
+                            <div id='right'>
+                                    <a href=""><img src="img/share<%= ev.get('category') %>.png"/></a> 
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
              </a>
-            <hr noshade />
+            <hr noshade class="hr_noshade" />
             <% if(ev.get("recommendation_id") != null) {%>
                 <div id="recommender" data-transition="fade">
                     <div id="left-content">
@@ -183,7 +196,7 @@
                             <div id="date"><%= ev.get("date") %> - <%= ev.get("time") %></div>
                             <div id="address"><%= ev.get("venue_text") %></div>
                         </div>
-                         <div id="description">
+                        <div id="description">
                             <%= ev.get("description") %>
                         </div>
                     </div>
