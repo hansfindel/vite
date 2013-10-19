@@ -609,8 +609,16 @@ function toggleCategorySwipe(){
     }
 }
 function toggleDescription(){
+    var height = parseInt($(".home_image_container").height())
+    $("#description").hide()
+    $("#action").hide()
+    $("#description").css("height", "auto")
+    $("#action").css("height", "auto")
+    var displacement = parseInt($("#description").height()) + parseInt($("#action").height())
+
     if(swipeActive){
         // from feed to event
+        $(".home_image_container").css("max-height", height - displacement)
         $("#description").css("display", "block");
         $("#action").css("display", "block");
         //$("#description").fadeIn();
@@ -624,6 +632,7 @@ function toggleDescription(){
     }
     else{
         // from event to feed
+        $(".home_image_container").css("max-height", height + displacement)
         $("#description").css("display", "none");
         $("#action").css("display", "none");
         //$("#description").fadeOut();
