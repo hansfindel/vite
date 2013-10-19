@@ -610,37 +610,41 @@ function toggleCategorySwipe(){
 }
 function toggleDescription(){
     var height = parseInt($(".home_image_container").height())
-    $("#description").hide()
-    $("#action").hide()
-    $("#description").css("height", "auto")
-    $("#action").css("height", "auto")
-    var displacement = parseInt($("#description").height()) + parseInt($("#action").height())
+    //$("#description").css("height", "auto")
+    //$("#action").css("height", "auto")
+    var displacement = parseInt($("#description").height()) + parseInt($("#description").css("margin-bottom")) + 
+        parseInt($("#action").height()) + parseInt($("#action").css("margin-top")) +
+        parseInt($("#action").css("margin-bottom")) + parseInt($("#action").css("padding-top")) + parseInt($("#action").css("padding-bottom"))
 
     if(swipeActive){
         // from feed to event
         $(".home_image_container").css("max-height", height - displacement)
-        $("#description").css("display", "block");
-        $("#action").css("display", "block");
+        //$("#description").css("display", "block");
+        //$("#action").css("display", "block");
+
+        $("#action_description").css("height", displacement + "px")
         //$("#description").fadeIn();
         //$("#action").fadeIn();
         //$("#description").css("visibility", "visible");
         //$("#action").css("visibility", "visible");
-        $("#description").css("height", "auto");
-        $("#action").css("height", "auto");
+        //$("#description").css("height", "auto");
+        //$("#action").css("height", "auto");
         $("div#details").css("max-height", "")
         $("div#details").css("height", "")
     }
     else{
         // from event to feed
         $(".home_image_container").css("max-height", height + displacement)
-        $("#description").css("display", "none");
-        $("#action").css("display", "none");
+        //$("#description").css("display", "none");
+        //$("#action").css("display", "none");
+
+        $("#action_description").css("height", "0px")
         //$("#description").fadeOut();
         //$("#action").fadeOut();
         //$("#description").css("visibility", "hidden");
         //$("#action").css("visibility", "hidden");
-        $("#description").css("height", "0px");
-        $("#action").css("height", "0px");
+        //$("#description").css("height", "0px");
+        //$("#action").css("height", "0px");
         $("div#details").css("max-height", "70px")
         $("div#details").css("height", "70px")
     }

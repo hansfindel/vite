@@ -85,15 +85,18 @@
                                 <%= ev.get("venue_text") %>
                             </div>
                         </div>
-                        <div id="description">
-                            <%= ev.get("description") %>
-                        </div>
-                        <div id="action">
-                            <div id='left'>
-                                <a href=""><img src="img/tickets<%= ev.get('category') %>.png"/></a> 
+                        
+                        <div id="action_description" class="transition_element" style="height: 0px; overflow: hidden;">
+                            <div id="description">
+                                <%= ev.get("description") %>
                             </div>
-                            <div id='right'>
-                                    <a href=""><img src="img/share<%= ev.get('category') %>.png"/></a> 
+                            <div id="action">
+                                <div id='left'>
+                                    <a href=""><img src="img/tickets<%= ev.get('category') %>.png"/></a> 
+                                </div>
+                                <div id='right'>
+                                        <a href=""><img src="img/share<%= ev.get('category') %>.png"/></a> 
+                                    </div>
                                 </div>
                             </div>
                         </div>
