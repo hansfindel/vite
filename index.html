@@ -183,17 +183,12 @@
                             <div id="date"><%= ev.get("date") %> - <%= ev.get("time") %></div>
                             <div id="address"><%= ev.get("venue_text") %></div>
                         </div>
-                         <div id="description" style="overflow:hidden; height:65px;" >
+                         <div id="description">
                             <%= ev.get("description") %>
                         </div>
                     </div>
                 </a>
                         
-                <div id="description-more">
-                    <a class="view_more more color-<%=ev.get('category')%>">
-                        Ver más 
-                    </a>
-                </div>
                 <div id="action">
                     <div id='left'>
                         <a href=""><img src="img/tickets<%= ev.get('category') %>.png"/></a> 
@@ -229,46 +224,7 @@
                 </div>
             <% }%>
         </div>
-        <script type="text/javascript">
-            function check_description(){
-                var description_element = document.getElementById("description");
-                var  difference = 0;
-                if(description_element){
-                    var scrollHeight = description_element.scrollHeight;
-                    var height = $(description_element).height();
-                    difference = scrollHeight - height;    
-                }
-                //var to55 = scrollHeight + " 55px";
-                //var from55 = "55 " + scrollHeight + "px";
-                if(scrollHeight < height){ 
-                    console.log("asdfafsasdfaf")
-                    $("#description-more").text("");
-                    $("#description-more").html("");
-                }
-                $(".view_more").unbind("click");
-                $(".view_more").click(function(e){
-                    //e.preventDefault();
-                    var link = $(this).children("a");
-                    h = $(".event_image").height();
-                    if($(this).hasClass("more")){
-                        $(this).removeClass("more");
-                        $(this).addClass("less");
-                        $(this).html("Ver menos");
-                        h -= difference;
-                        $("#description").css("height", "");
-                    }
-                    else{
-                        $(this).addClass("more");
-                        $(this).removeClass("less");
-                        $(this).html("Ver más")
-                        $("#description").css("height", "65px");
-                    }
-                    $(".image_container").css("height", h)
-                    return false;
-                });
-            }
-            check_description();
-        </script>
+        
     </script>
 
     <script type="text/template" id="recommendations">
