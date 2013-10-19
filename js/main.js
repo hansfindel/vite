@@ -560,6 +560,7 @@ $(document).ready(function () {
 });
 
 function feed_to_event_menu(){
+    $("h1.header-title").text("Event")
     var link = $("a#menu");
     link.attr("href", "#home")
     link.addClass("back-link")
@@ -575,6 +576,7 @@ function feed_to_event_menu(){
     //<a id="menu" href="#menu" class="menu-link"></a> -> href="#home" class="back-link"
 }
 function event_to_feed_menu(){
+    $("h1.header-title").text("Upcoming")
     var link = $("a#menu");
     link.attr("href", "#menu")
     link.removeClass("back-link")
