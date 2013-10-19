@@ -569,6 +569,8 @@ function feed_to_event_menu(){
 
     link.bind("click", function(){event_to_feed_menu(); return false;} )
     
+    toggleCategorySwipe()
+    //$(".category_swipe").fadeOut("slow")
     //<a id="menu" href="#menu" class="menu-link"></a> -> href="#home" class="back-link"
 }
 function event_to_feed_menu(){
@@ -580,4 +582,18 @@ function event_to_feed_menu(){
     //$("nav#menu").remove()
     app.navigate("#")
     //link.removeAttr("id")
+    //$(".category_swipe").fadeIn("slow")
+    toggleCategorySwipe()
+    swipeActive = true;    
+}
+function toggleCategorySwipe(){
+    swipes = $(".category_swipe")
+    if(swipeActive){
+        // in feed going to event
+        swipes.css("padding-top", "0%")
+        swipes.css("padding-bottom", "0%")
+    }else{
+        swipes.css("padding-top", "1.5%")
+        swipes.css("padding-bottom", "0.5%")
+    }
 }
