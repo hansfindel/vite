@@ -1,9 +1,9 @@
 //var api_host = "http://outro.vitenow.com";
-var api_host = "http://192.168.0.178:3000";
+//var api_host = "http://192.168.0.178:3000";
 //var api_host = "http://192.168.1.113:3000"
 //var api_host = "http://192.168.1.101:3000";
 //var api_host = "http://162.243.16.96";
-//var api_host = "http://localhost:3000"
+var api_host = "http://localhost:3000"
 
 
 //Models
@@ -575,8 +575,9 @@ function feed_to_event_menu(){
         return false;
     } )
     
-    toggleCategorySwipe()
     toggleDescription()
+    toggleCategorySwipe()
+
     //$(".category_swipe").fadeOut("slow")
     //<a id="menu" href="#menu" class="menu-link"></a> -> href="#home" class="back-link"
 }
@@ -591,8 +592,10 @@ function event_to_feed_menu(){
     app.navigate("#")
     //link.removeAttr("id")
     //$(".category_swipe").fadeIn("slow")
-    toggleCategorySwipe()
+    
     toggleDescription()
+    toggleCategorySwipe()
+
     swipeActive = true;    
 }
 function toggleCategorySwipe(){
@@ -616,9 +619,11 @@ function toggleDescription(){
         parseInt($("#action").height()) + parseInt($("#action").css("margin-top")) +
         parseInt($("#action").css("margin-bottom")) + parseInt($("#action").css("padding-top")) + parseInt($("#action").css("padding-bottom"))
 
+    var margin = $(".category_swipe").length * ( parseInt($(".category_swipe").css("padding-top"))  + parseInt($(".category_swipe").css("padding-bottom")) )
+
     if(swipeActive){
         // from feed to event
-        $(".home_image_container").css("max-height", height - displacement)
+        $(".home_image_container").css("max-height", height - displacement + margin)
         //$("#description").css("display", "block");
         //$("#action").css("display", "block");
 
@@ -634,7 +639,7 @@ function toggleDescription(){
     }
     else{
         // from event to feed
-        $(".home_image_container").css("max-height", height + displacement)
+        $(".home_image_container").css("max-height", height + displacement - margin)
         //$("#description").css("display", "none");
         //$("#action").css("display", "none");
 
