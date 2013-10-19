@@ -570,6 +570,8 @@
 	right: 0px;
 }
 
+.total-hidden{display: none;visibility: hidden;}
+
 /* Setting of images containers height on home */
 @media(max-height: 1280px){
 	.home_image_container{ 

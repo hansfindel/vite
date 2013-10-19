@@ -237,7 +237,7 @@ window.DetailsView = Backbone.View.extend({
         if(ev.get("id") == undefined){
             app.navigate('#', {trigger: true}); 
         }
-        $(this.el).html(this.template(ev));
+        //$(this.el).html(this.template(ev));
 
         return this;
     }
@@ -450,11 +450,15 @@ var AppRouter = Backbone.Router.extend({
     },
 
     details:function (eventDet, reverseTransition) {
-
+        /*
         if(reverseTransition == 1)
             this.changePage(new DetailsView(), 'slide', true);
         else
             this.changePage(new DetailsView());
+        */
+        // instaed of changePage transition
+        feed_to_event_menu()
+        
 
         swipeActive = false;
     },
@@ -553,3 +557,27 @@ $(document).ready(function () {
         });
     });
 });
+
+function feed_to_event_menu(){
+    var link = $("a#menu");
+    link.attr("href", "#home")
+    link.addClass("back-link")
+    link.removeClass("menu-link")
+    link.removeClass("ui-link")
+    $("nav#menu").remove()
+    //link.removeAttr("id")
+
+    link.bind("click", function(){event_to_feed_menu(); return false;} )
+    
+    //<a id="menu" href="#menu" class="menu-link"></a> -> href="#home" class="back-link"
+}
+function event_to_feed_menu(){
+    var link = $("a#menu");
+    link.attr("href", "#menu")
+    link.removeClass("back-link")
+    link.addClass("menu-link")
+    link.addClass("ui-link")
+    //$("nav#menu").remove()
+    app.navigate("#")
+    //link.removeAttr("id")
+}
