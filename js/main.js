@@ -1,9 +1,9 @@
 //var api_host = "http://outro.vitenow.com";
-//var api_host = "http://192.168.0.178:3000";
-//var api_host = "192.168.1.113:3000"
+var api_host = "http://192.168.0.178:3000";
+//var api_host = "http://192.168.1.113:3000"
 //var api_host = "http://192.168.1.101:3000";
 //var api_host = "http://162.243.16.96";
-var api_host = "http://localhost:3000"
+//var api_host = "http://localhost:3000"
 
 
 //Models
@@ -454,9 +454,8 @@ var AppRouter = Backbone.Router.extend({
         if(reverseTransition == 1)
             this.changePage(new DetailsView(), 'slide', true);
         else
-            this.changePage(new DetailsView(), 'slide');
+            this.changePage(new DetailsView());
 
-        check_description();
         swipeActive = false;
     },
 
