@@ -457,6 +457,7 @@ var AppRouter = Backbone.Router.extend({
             this.changePage(new DetailsView());
         */
         // instaed of changePage transition
+        if(ev.get("id") == undefined){app.home(); app.navigate("#"); return;}
         feed_to_event_menu()
         
 
@@ -593,7 +594,9 @@ function toggleCategorySwipe(){
         swipes.css("padding-top", "0%")
         swipes.css("padding-bottom", "0%")
     }else{
-        swipes.css("padding-top", "1.5%")
-        swipes.css("padding-bottom", "0.5%")
+        //swipes.css("padding-top", "1.5%")
+        //swipes.css("padding-bottom", "0.5%")
+        swipes.css("padding-top", "")
+        swipes.css("padding-bottom", "")
     }
 }
