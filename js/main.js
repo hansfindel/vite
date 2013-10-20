@@ -217,7 +217,9 @@ window.HomeView = Backbone.View.extend({
             //console.log(ev.toJSON());
             $(this.el).html( this.template({ev: ev, prev: prev, next: next}) );
         }
-        
+        if($("nav#menu").length == 0){
+            append_menu()
+        }
         return this;
     },
 
@@ -687,7 +689,8 @@ function minimize(){
   //$("div[data-role=content]").addClass("slow_transition")
   //var parent = $("div[data-current-event-id=" + ev.get('id') + "]");
   //var current = $(parent.children())
-
+  
+  // coordinate selectors 
   var home_image = $(".home_image_container")
   home_image.addClass("slow_transition")
   var recomender_image = $("#recommender #left-content img")
@@ -698,9 +701,18 @@ function minimize(){
   action_description.addClass("slow_transition");
   var details = $("div#details")
   details.addClass("slow_transition");
-
   $(".hr_noshade").remove()
 
+  // swipe down (reomve eventId ++)
+  eventId++;  
+  // if swipeDown
+  var home_collection = events;
+  var view = new HomeView({ collection: home_collection });
+  console.log(view)
+  var new_html = view.render()
+  console.log(new_html)
+
+  // use selectors to fade away
   recomender_image.css("max-height", "0px")
   home_image.css("max-height", "0px")
   recommender.css("max-height", "0px")
