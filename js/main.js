@@ -217,9 +217,9 @@ window.HomeView = Backbone.View.extend({
             //console.log(ev.toJSON());
             $(this.el).html( this.template({ev: ev, prev: prev, next: next}) );
         }
-        if($("nav#menu").length == 0){
-            append_menu()
-        }
+        
+        append_menu() // if it there isnt one
+        
         return this;
     },
 
@@ -661,11 +661,13 @@ function compile_template(template_name, params){
     return _.template($("#" + template_name).html(), params);
 }
 function append_menu(){
-    var menu_html = _.template($("#navigation_navbar").html(), {});
-    $("body").append(menu_html)
-    $('nav#menu').mmenu({
-        configuration: {pageSelector: '> div[data-role="page"]:first'}
-    });
+    if($("nav#menu").length == 0){
+        var menu_html = _.template($("#navigation_navbar").html(), {});
+        $("body").append(menu_html)
+        $('nav#menu').mmenu({
+            configuration: {pageSelector: '> div[data-role="page"]:first'}
+        });
+    }
 }
 
 
@@ -687,30 +689,32 @@ function minimize(){
 
   */
   //$("div[data-role=content]").addClass("slow_transition")
-  //var parent = $("div[data-current-event-id=" + ev.get('id') + "]");
+  var parent = $("div[data-current-event-id=" + ev.get('id') + "]");
   //var current = $(parent.children())
   
   // coordinate selectors 
-  var home_image = $(".home_image_container")
+  var home_image = $(".home_image_container", parent)
   home_image.addClass("slow_transition")
-  var recomender_image = $("#recommender #left-content img")
+  var recomender_image = $("#recommender #left-content img", parent)
   recomender_image.addClass("transition_element")
-  var recommender = $("#recommender")
+  var recommender = $("#recommender", parent)
   recommender.addClass("slow_transition")
-  var action_description = $("#action_description")
+  var action_description = $("#action_description", parent)
   action_description.addClass("slow_transition");
-  var details = $("div#details")
+  var details = $("div#details", parent)
   details.addClass("slow_transition");
   $(".hr_noshade").remove()
 
   // swipe down (reomve eventId ++)
   eventId++;  
-  // if swipeDown
+  
   var home_collection = events;
   var view = new HomeView({ collection: home_collection });
-  console.log(view)
-  var new_html = view.render()
+  view.render()
+  var new_html = $("div[data-role=content]", view.el)
   console.log(new_html)
+  // if swipeDown
+  $("div[data-role=page]").append(new_html)
 
   // use selectors to fade away
   recomender_image.css("max-height", "0px")
@@ -719,6 +723,12 @@ function minimize(){
   action_description.css("max-height", "0px")
   details.css("max-height", "0px")
   
+  //after fade, destroy
+  recomender_image.remove()
+  home_image.remove()
+  recommender.remove()
+  action_description.remove()
+  details.remove()
   
   
 }
