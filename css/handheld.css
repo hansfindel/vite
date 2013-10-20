@@ -571,6 +571,11 @@
        -moz-transition: all .5s ease;
             transition: all .5s ease;	
 }
+.slow_transition{
+	-webkit-transition: all 1s;
+       -moz-transition: all 1s;
+            transition: all 1s;		
+}
 
 /*#description, #action{
 	-webkit-transition: all .5s ease;

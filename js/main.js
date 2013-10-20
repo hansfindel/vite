@@ -459,7 +459,6 @@ var AppRouter = Backbone.Router.extend({
         // instaed of changePage transition
         if(ev.get("id") == undefined){app.home(); app.navigate("#"); return;}
         feed_to_event_menu()
-        
 
         swipeActive = false;
     },
@@ -572,7 +571,8 @@ function feed_to_event_menu(){
     link.bind("click", function(){
         event_to_feed_menu(); 
         link.unbind("click");
-        append_menu()
+        append_menu();
+        swipeActive = true;    
         return false;
     } )
     
@@ -596,8 +596,6 @@ function event_to_feed_menu(){
     
     toggleDescription()
     toggleCategorySwipe()
-
-    swipeActive = true;    
 }
 function toggleCategorySwipe(){
     swipes = $(".category_swipe")
@@ -666,4 +664,32 @@ function append_menu(){
     $('nav#menu').mmenu({
         configuration: {pageSelector: '> div[data-role="page"]:first'}
     });
+}
+
+
+function minimize(){
+  /*$(".home_image_container").css("height", "0px");
+  $("#details").css("height", "0px")
+  $("#details").css("overflow", "hidden")
+  $("#action_description").css("height", "0px");
+  $("#recommender").css("height", "0px")
+  $("#recommender").css("overflow", "hidden")
+  */
+  $(".hr_noshade").remove()
+  $("div[data-role=content]").addClass("slow_transition")
+  var h = ($("div[data-role=content]").height() - 1) + "px"
+  $("div[data-role=content]").css("height", h)
+
+  $("#recommender #left-content img").addClass("transition_element")
+  $("#recommender #left-content img").css("max-height", "0px")
+  
+  $("#recommender").addClass("transition_element")
+  $("#recommender").css("overflow", "hidden")
+  $("#recommender").css("max-height", "0px")
+  
+
+  $("div[data-role=content]").css("height", "0px")
+
+  
+  
 }

@@ -32,7 +32,7 @@
             <h1 class="header-title">Upcoming</h1>
             <a id="notification" href=""></a>
         </div>
-        <div data-role="content">
+        <div data-role="content" data-current-event-id="<%= ev.get('id') %>">
             <% if( prev ){ %>
                 <div id="category-<%= prev.get('category') %>" class="category_swipe" onclick="swipeUp();"></div>
             <% } %>
@@ -95,15 +95,14 @@
                                     <a href=""><img src="img/tickets<%= ev.get('category') %>.png"/></a> 
                                 </div>
                                 <div id='right'>
-                                        <a href=""><img src="img/share<%= ev.get('category') %>.png"/></a> 
-                                    </div>
+                                    <a href=""><img src="img/share<%= ev.get('category') %>.png"/></a> 
                                 </div>
                             </div>
                         </div>
 
                     </div>
                 </div>
-             </a>
+            </a>
             <hr noshade class="hr_noshade" />
             <% if(ev.get("recommendation_id") != null) {%>
                 <div id="recommender" data-transition="fade">
