@@ -571,7 +571,8 @@ function feed_to_event_menu(){
 
     link.bind("click", function(){
         event_to_feed_menu(); 
-        link.unbind("click")
+        link.unbind("click");
+        append_menu()
         return false;
     } )
     
@@ -653,4 +654,16 @@ function toggleDescription(){
         $("div#details").css("max-height", "70px")
         $("div#details").css("height", "70px")
     }
+}
+
+
+function compile_template(template_name, params){
+    return _.template($("#" + template_name).html(), params);
+}
+function append_menu(){
+    var menu_html = _.template($("#navigation_navbar").html(), {});
+    $("body").append(menu_html)
+    $('nav#menu').mmenu({
+        configuration: {pageSelector: '> div[data-role="page"]:first'}
+    });
 }
