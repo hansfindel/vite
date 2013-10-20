@@ -685,23 +685,28 @@ function minimize(){
 
   */
   //$("div[data-role=content]").addClass("slow_transition")
+  //var parent = $("div[data-current-event-id=" + ev.get('id') + "]");
+  //var current = $(parent.children())
 
-/*  var parent = $("div[data-current-event-id=" + ev.get('id') + "]");
-  var current = parent.children()
+  var home_image = $(".home_image_container")
+  home_image.addClass("slow_transition")
+  var recomender_image = $("#recommender #left-content img")
+  recomender_image.addClass("transition_element")
+  var recommender = $("#recommender")
+  recommender.addClass("slow_transition")
+  var action_description = $("#action_description")
+  action_description.addClass("slow_transition");
+  var details = $("div#details")
+  details.addClass("slow_transition");
 
-  parent.addClass("slow_transition")
-  parent.addClass("transition_element")
+  $(".hr_noshade").remove()
+
+  recomender_image.css("max-height", "0px")
+  home_image.css("max-height", "0px")
+  recommender.css("max-height", "0px")
+  action_description.css("max-height", "0px")
+  details.css("max-height", "0px")
   
-  current.addClass("slow_transition")
-  current.addClass("transition_element")
-  var h = $(parent).height() - 1
-  parent.css("height", (h-1) + "px");
-  current.css("overflow", "hidden")
-  parent.css("overflow", "hidden")
-  $("#recommender #left-content img").addClass("transition_element")
-  $("#recommender #left-content img").css("max-height", "0px")
-  current.css("max-height", "0px")
-  parent.css("max-height", "0px")
-  */
+  
   
 }
