@@ -342,7 +342,8 @@ function swipeUp(){
 	    if(eventId < 0){
 	    	eventId = 0;
 	    }else{
-	    	app.home('slideup');
+	    	//app.home('slideup');
+            move_feed_event(false)
 	    }
 	}
 };
@@ -355,7 +356,8 @@ function swipeDown(){
 		if(eventId > events.length - 1){
 			eventId = events.length - 1;
 		}else{
-			app.home('slidedown');
+			//app.home('slidedown');
+            move_feed_event(true)
 		}
 	}	
 };
@@ -671,7 +673,7 @@ function append_menu(){
 }
 
 
-function minimize(){
+function move_feed_event(next){
   /*$(".home_image_container").css("height", "0px");
   $("#details").css("height", "0px")
   $("#details").css("overflow", "hidden")
@@ -706,17 +708,43 @@ function minimize(){
   $(".hr_noshade").remove()
 
   // swipe down (reomve eventId ++)
-  eventId++;  
-  
   var home_collection = events;
   var view = new HomeView({ collection: home_collection });
   view.render()
   var new_html = $("div[data-role=content]", view.el)
   
-  // if swipeDown
-  //$("div[data-role=page]").append(new_html)
-  //else
-  $("div[data-role=page] #header").after(new_html)
+  if(next){
+    // if swipeDown
+    $("div[data-role=page]").append(new_html)
+  }
+  else{
+    //else swipeUp
+    new_html.addClass("slow_transition")
+    new_html.css("max-height", "0px")
+    var new_home_image = $(".home_image_container", new_html)
+    new_home_image.addClass("slow_transition")
+    var new_recomender_image = $("#recommender #left-content img", new_html)
+    new_recomender_image.addClass("transition_element")
+    var new_recommender = $("#recommender", new_html)
+    new_recommender.addClass("slow_transition")
+    var new_action_description = $("#action_description", new_html)
+    new_action_description.addClass("slow_transition");
+    var new_details = $("div#details", new_html)
+    new_details.addClass("slow_transition");
+    new_recomender_image.css("max-height", "0px")
+    new_home_image.css("max-height", "0px")
+    new_recommender.css("max-height", "0px")
+    new_action_description.css("max-height", "0px")
+    new_details.css("max-height", "0px")
+
+    $("div[data-role=page] #header").after(new_html)  
+    new_html.css("max-height", "") 
+    new_recomender_image.css("max-height", "")
+    new_home_image.css("max-height", "")
+    new_recommender.css("max-height", "")
+    new_action_description.css("max-height", "")
+    new_details.css("max-height", "")
+  }
   
   // use selectors to fade away
   recomender_image.css("max-height", "0px")
@@ -725,12 +753,15 @@ function minimize(){
   action_description.css("max-height", "0px")
   details.css("max-height", "0px")
   
-  //after fade, destroy
-  recomender_image.remove()
-  home_image.remove()
-  recommender.remove()
-  action_description.remove()
-  details.remove()
   
+  setTimeout(function(){
+      //after fade, destroy
+    recomender_image.remove()  
+    home_image.remove()
+    recommender.remove()
+    action_description.remove()
+    details.remove()
+    parent.remove();
+  }, 490);
   
 }
