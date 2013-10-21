@@ -712,10 +712,12 @@ function minimize(){
   var view = new HomeView({ collection: home_collection });
   view.render()
   var new_html = $("div[data-role=content]", view.el)
-  console.log(new_html)
+  
   // if swipeDown
-  $("div[data-role=page]").append(new_html)
-
+  //$("div[data-role=page]").append(new_html)
+  //else
+  $("div[data-role=page] #header").after(new_html)
+  
   // use selectors to fade away
   recomender_image.css("max-height", "0px")
   home_image.css("max-height", "0px")
