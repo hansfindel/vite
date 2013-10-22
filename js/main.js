@@ -628,7 +628,9 @@ function toggleDescription(){
 
     if(swipeActive){
         // from feed to event
-        $(".home_image_container").css("max-height", height - displacement + margin)
+        var size = height - displacement + margin;
+        if(size < 292){ size = 292; }
+        $(".home_image_container").css("max-height", size)
         //$("#description").css("display", "block");
         //$("#action").css("display", "block");
 
