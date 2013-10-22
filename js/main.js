@@ -254,7 +254,7 @@ window.RecommendationsView = Backbone.View.extend({
         }
     },
     render: function () {
-        console.log("ev: ", ev)
+        //console.log("ev: ", ev)
         if(ev == undefined || ev.get("id") == undefined){
             app.navigate("#", {trigger: true})
         }
@@ -774,4 +774,10 @@ function move_feed_event(next){
     parent.remove();
   }, 490);
   
+}
+function back_to_event(){
+    app.home(); 
+    $(".home_image_container").click()
+    app.navigate('#details/<%= ev.get("id") %>/1')
+    return false;
 }
