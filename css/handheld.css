@@ -431,6 +431,13 @@
 					line-height: 120%;
 					display: inline-block;			
 				}
+				.share_recommendation{
+					margin-top: 30px;
+					margin-bottom: -10px;
+				}
+				.share_recommendation a{ 
+					color: #6b6b6b !important;
+				}
 				#description-rec.on_profile{
 					font-family: HelveticaNeueLTStd-Roman;
 					font: 17px/1 "HelveticaNeueLTStd-Roman";

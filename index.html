@@ -118,7 +118,7 @@
                             Posted on <%= ev.get("recommendation_date") %>
                         </div>
                     </div>
-                    <div id="description-rec"> 
+                    <div id="description-rec" style="padding-top:10px;"> 
                         <%= ev.get("recommendation_text") %>
                     </div>
                 </div>
@@ -267,9 +267,11 @@
                         Posted on <%= comments[i].get('date') %> 
                     </div>
                 </div>
-                <div id="description-rec">
+                <div id="description-rec" style="padding-top: 25px;"> 
                     <%= comments[i].get('text') %> - <%= comments[i].get('name') %>
+                    <div class="share_recommendation"><a href="">Share</a></div>
                 </div>
+
             </div>
             <% if(i < comments.length - 1){%> 
                 <hr noshade /> 
