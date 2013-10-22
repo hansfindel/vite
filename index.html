@@ -151,7 +151,11 @@
             </ul>
             <ul class="menu_nav_links">
                 <li class="clickable"><a href="#" class="chat">     <img src='/img/Chat.png' />      </a></li>
-                <li class="clickable"><a href="#" class="profile">  <img src='/img/Profile.png' />   </a></li>
+                <% if(current_user.get("id")){ %>
+                    <li class="clickable"><a href="#profile/<%= current_user.get('id') %>" class="profile">  <img src='/img/Profile.png' />   </a></li>
+                <% }else{  %>
+                    <li class="clickable"><a href="#" class="profile">  <img src='/img/Profile.png' />   </a></li>
+                <% }%>
                 <li class="clickable"><a href="#" class="settings"> <img src='/img/Settings.png' />  </a></li>
                 
             </ul>
