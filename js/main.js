@@ -719,7 +719,7 @@ function move_feed_event(next){
   }
   else{
     //else swipeUp
-    new_html.addClass("slow_transition")
+    /*new_html.addClass("slow_transition")
     new_html.css("max-height", "0px")
     var new_home_image = $(".home_image_container", new_html)
     new_home_image.addClass("slow_transition")
@@ -736,14 +736,16 @@ function move_feed_event(next){
     new_recommender.css("max-height", "0px")
     new_action_description.css("max-height", "0px")
     new_details.css("max-height", "0px")
-
+    */
+    new_html.css("display", "none")
     $("div[data-role=page] #header").after(new_html)  
-    new_html.css("max-height", "") 
-    new_recomender_image.css("max-height", "")
-    new_home_image.css("max-height", "")
-    new_recommender.css("max-height", "")
-    new_action_description.css("max-height", "")
-    new_details.css("max-height", "")
+    new_html.fadeIn()
+    //new_html.css("max-height", "") 
+    //new_recomender_image.css("max-height", "")
+    //new_home_image.css("max-height", "")
+    //new_recommender.css("max-height", "")
+    //new_action_description.css("max-height", "")
+    //new_details.css("max-height", "")
   }
   
   // use selectors to fade away
@@ -756,6 +758,12 @@ function move_feed_event(next){
   
   setTimeout(function(){
       //after fade, destroy
+    recomender_image.fadeOut()  
+    home_image.fadeOut()
+    recommender.fadeOut()
+    action_description.fadeOut()
+    details.fadeOut()
+    parent.fadeOut();
     recomender_image.remove()  
     home_image.remove()
     recommender.remove()
