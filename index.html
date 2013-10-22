@@ -122,6 +122,9 @@
                         <%= ev.get("recommendation_text") %>
                     </div>
                 </div>
+                <div id="view-more" class="view_more_recommendations" style="display: none;">
+                    <a href="#recommendations/<%= ev.get('id') %>/0" class="date" data-transition="slideup">view more recommendations</a>
+                </div>
             <% }%>
             <% if( next ){%>
                 <div id="category-<%= next.get('category') %>" class="category_swipe end_of_page" onclick="swipeDown();">

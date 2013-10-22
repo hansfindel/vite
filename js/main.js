@@ -569,6 +569,7 @@ function feed_to_event_menu(){
     link.addClass("back-link")
     link.removeClass("menu-link")
     link.removeClass("ui-link")
+    $(".view_more_recommendations").fadeIn()
     $("nav#menu").remove()
     //link.removeAttr("id")
 
@@ -594,6 +595,7 @@ function event_to_feed_menu(){
     link.addClass("menu-link")
     link.addClass("ui-link")
     //$("nav#menu").remove()
+    $(".view_more_recommendations").fadeOut()
     app.navigate("#")
     //link.removeAttr("id")
     //$(".category_swipe").fadeIn("slow")
