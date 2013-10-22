@@ -192,7 +192,7 @@
 				;
 	        }
 
-			#titulo {
+			#titulo, #profile_info #titulo h1 {
 				background: transparent;
 				text-align: left;
 				font-family: HelveticaNeueLTStd-Roman;
@@ -202,8 +202,10 @@
 				/* added */
 				margin-bottom: 25px;
 			}
-			#profile_info #titulo{
+			#profile_info #titulo, #profile_info #titulo h1{
 				color: #555555;
+				width: 300px;
+				text-shadow: none;
 			}
 			#profile_info .links a, #profile_info .links a p{
 				font-family: HelveticaNeueLTStd-ThCn;
