@@ -72,7 +72,7 @@
                             <div id="texto-categoria">SOCIAL LIFE</div>
                         </div>
                     <% }%>
-                    <div id="details" style="max-height: 70px;">
+                    <div id="details">
                         <div id="left-top">
                             <div id="titulo" class="category-<%= ev.get('category')%>-color">
                                 <%= ev.get("title") %>
@@ -86,10 +86,10 @@
                                 <%= ev.get("venue_text") %>
                             </div>
                         </div>
-                        
-                        <div id="action_description" class="transition_element" style="height: 0px; overflow: hidden;">
-                            <div id="description">
-                                <%= ev.get("description") %>
+
+                        <div id="action_description" class="transition_element" style="height: 55px; overflow: hidden;">
+                            <div id="description" data-text="<%= ev.get('description') %>">
+                                <%= preview_text(ev.get("description")) %>
                             </div>
                             <div id="action">
                                 <div id='left'>

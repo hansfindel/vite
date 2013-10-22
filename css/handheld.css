@@ -282,7 +282,19 @@
 				line-height: 120%;	
 				margin-bottom: 2%;	
 			}
-
+			#fake_description {
+				background: transparent;
+				text-align: left;
+				color: #6b6b6b;
+				font-family: HelveticaNeueLTStd-ThCn;
+				font: 17px/1 "HelveticaNeueLTStd-ThCn";
+				display: block;
+				margin-left: 5%;
+				width: 90%;
+				display: inline-block;	
+				line-height: 120%;	
+				margin-bottom: 2%;	
+			}
 
 		#view-more {
 			margin-bottom: 5%;
@@ -295,7 +307,9 @@
 
 
 
-
+		#action_description{
+			height: 55px;
+		}
 
 		#action {
 			/*

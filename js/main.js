@@ -641,6 +641,11 @@ function toggleDescription(){
         //$("#action").css("height", "auto");
         $("div#details").css("max-height", "")
         $("div#details").css("height", "")
+        //$("#fake_description").hide()
+        var description = $("#description")
+        var temp = description.data("text")
+        description.data("text", description.text())
+        description.text(temp)
     }
     else{
         // from event to feed
@@ -648,15 +653,21 @@ function toggleDescription(){
         //$("#description").css("display", "none");
         //$("#action").css("display", "none");
 
-        $("#action_description").css("height", "0px")
+        $("#action_description").css("height", "")
         //$("#description").fadeOut();
         //$("#action").fadeOut();
         //$("#description").css("visibility", "hidden");
         //$("#action").css("visibility", "hidden");
         //$("#description").css("height", "0px");
         //$("#action").css("height", "0px");
-        $("div#details").css("max-height", "70px")
-        $("div#details").css("height", "70px")
+        $("div#details").css("max-height", "")
+        //$("div#details").css("max-height", "110px")
+        //$("div#details").css("height", "70px")
+        //$("#fake_description").show()
+        var description = $("#description")
+        var temp = description.data("text")
+        description.data("text", description.text())
+        description.text(temp)
     }
 }
 
@@ -780,4 +791,12 @@ function back_to_event(){
     $(".home_image_container").click()
     app.navigate('#details/<%= ev.get("id") %>/1')
     return false;
+}
+function preview_text(string){
+    var length = 320
+    if(string == undefined) return "";
+    if(string.length < length) return string;
+    var text = string.slice(0, length - 2)
+    var last_space = text.lastIndexOf(" ")
+    return text.slice(0, last_space)+ "..."
 }
