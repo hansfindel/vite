@@ -104,7 +104,7 @@ html.mm-left.mm-opened #mm-blocker
 html.mm-left.mm-opening .mm-page,
 html.mm-left.mm-opening #mm-blocker
 {
-	/*margin-left: -65px;*/
+	margin-left: -20%;
 	left: 100%;
 }
 
@@ -145,7 +145,7 @@ html.mm-opened body
 .mm-menu
 {
 	display: none;
-	width: 100%;
+	width: 80%;
 	height: 100%;
 	position: absolute;
 	left: 0;
@@ -725,6 +725,7 @@ html.mm-no-overflowscrolling.mm-right .mm-menu
 	html.mm-left.mm-opening .mm-page,
 	html.mm-left.mm-opening #mm-blocker
 	{
+		margin-left: 0px;
 		left: 500px;
 		/*left: 130px;*/
 	}
