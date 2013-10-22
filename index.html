@@ -327,8 +327,8 @@
                         </div>
                         <div class="shares color-<%= comments[i].get('event_category') %>"> <%= recommendationCollection.shareCount(comments[i].get('event_id')) %> Shares</div>
                     </div>
-                    <div id="description-rec">
-                        <%= comments[i].get('text') %>
+                    <div id="description-rec" class="on_profile">
+                        <p><%= comments[i].get('text') %></p>
                     </div>
                 </div>
             <% } %>
@@ -360,7 +360,7 @@
                         <a href="#profile/<%= us.get(('id')) %>/followers" class="<%= title == 'Followers' ? 'selected' : '' %>" >
                             <p><%= us.followersCount() %> <span>Followers</span></p>
                         </a>
-                        <a href="#profile/<%= us.get(('id')) %>/followees" class="<%= title == 'Followers' ? 'selected' : '' %>">
+                        <a href="#profile/<%= us.get(('id')) %>/followees" class="<%= title == 'Followers' ? '' : 'selected' %>">
                             <p><%= us.followeesCount() %> <span>Followees</span> </p>
                         </a>
                     </div>

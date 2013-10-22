@@ -205,6 +205,14 @@
 			#profile_info #titulo{
 				color: #555555;
 			}
+			#profile_info .links a, #profile_info .links a p{
+				font-family: HelveticaNeueLTStd-ThCn;
+				font: 21px/1 "HelveticaNeueLTStd-ThCn";
+				color: #c0bfbf;
+			}
+			#profile_info .links .selected, #profile_info .links a.selected p{
+				color: #33b5e5;
+			}
 
 			.category-1-color{
 				color: #2468b7 !important;
@@ -423,7 +431,15 @@
 					line-height: 120%;
 					display: inline-block;			
 				}
-
+				#description-rec.on_profile{
+					font-family: HelveticaNeueLTStd-Roman;
+					font: 17px/1 "HelveticaNeueLTStd-Roman";
+					margin-top: 0px;
+				}
+				#description-rec.on_profile p{
+					clear: both;
+					padding-top: 15px;
+				}
 
 
 
