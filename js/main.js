@@ -1,9 +1,10 @@
-var api_host = "http://outro.vitenow.com";
+//var api_host = "http://outro.vitenow.com";
 //var api_host = "http://192.168.0.178:3000";
 //var api_host = "http://192.168.1.113:3000"
 //var api_host = "http://192.168.1.101:3000";
 //var api_host = "http://162.243.16.96";
-//var api_host = "http://localhost:3000"
+var api_host = "http://localhost:3000"
+
 
 
 //Models
@@ -136,7 +137,7 @@ recommendationCollection.fetch();
 var us = new User;
 var userCollection = new UsersList;
 
-var current_user; 
+var current_user = new User; 
 userCollection.fetch()
     .done(function(){
         if(current_user == undefined){
