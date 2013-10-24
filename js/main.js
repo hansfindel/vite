@@ -444,6 +444,20 @@ var AppRouter = Backbone.Router.extend({
             this.changePage(new HomeView({ collection: home_collection }),'slide',true);
         }
         swipeActive = true;
+        
+        $("div[data-role='page']").touchwipe({
+            wipeUp: function() {
+                //eventId++;
+                //app.home('slideup');
+            	swipeUp();
+            },
+            wipeDown: function() {
+            	swipeDown();
+            },
+            min_move_x: 15,
+            min_move_y: 15,
+            preventDefaultEvents: false
+        });
     },
     home_category: function(category_id){
         //console.log("#home_category")
@@ -537,20 +551,6 @@ $(document).ready(function () {
             callback        : function() {$.mobile.changePage( this.href, {transition: 'slideup'});}
         },
         configuration: {pageSelector: '> div[data-role="page"]:first'}
-    });
-
-    $(document.body).touchwipe({
-        wipeUp: function() {
-            //eventId++;
-            //app.home('slideup');
-        	swipeUp();
-        },
-        wipeDown: function() {
-        	swipeDown();
-        },
-        min_move_x: 15,
-        min_move_y: 15,
-        preventDefaultEvents: false
     });
 
     $(document).on('pageshow',function( e, ui ){
