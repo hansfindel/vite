@@ -219,8 +219,6 @@ window.HomeView = Backbone.View.extend({
             $(this.el).html( this.template({ev: ev, prev: prev, next: next}) );
         }
         
-        append_menu() // if it there isnt one
-        
         return this;
     },
 
@@ -444,6 +442,8 @@ var AppRouter = Backbone.Router.extend({
             this.changePage(new HomeView({ collection: home_collection }),'slide',true);
         }
         swipeActive = true;
+        
+        append_menu(); // if it there isnt one 
         
         $("div[data-role='page']").touchwipe({
             wipeUp: function() {
@@ -680,11 +680,13 @@ function compile_template(template_name, params){
 }
 function append_menu(){
     if($("nav#menu").length == 0){
-        var menu_html = _.template($("#navigation_navbar").html(), {});
-        $("body").append(menu_html)
-        $('nav#menu').mmenu({
-            configuration: {pageSelector: '> div[data-role="page"]:first'}
-        });
+    	if($("#navigation_navbar") != undefined && $(document.body) != undefined){
+			var menu_html = _.template($("#navigation_navbar").html());
+			$(document.body).append(menu_html)
+			$('nav#menu').mmenu({
+				configuration: {pageSelector: '> div[data-role="page"]:first'}
+			});
+    	} 
     }
 }
 
