@@ -681,3 +681,15 @@
 		overflow: hidden;
 	}	
 }
+@media(max-height: 650px){
+	.home_image_container{
+		max-height: 250px;
+		overflow: hidden;
+	}
+}
+@media(max-height: 480px){
+	.home_image_container{
+		max-height: 150px;
+		overflow:hidden;
+	}
+}

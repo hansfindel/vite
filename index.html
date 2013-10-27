@@ -150,13 +150,13 @@
                 <li><a href="#home/6">Social Life</a></li>
             </ul>
             <ul class="menu_nav_links">
-                <li class="clickable"><a href="#" class="chat">     <img src='/img/Chat.png' />      </a></li>
+                <li class="clickable"><a href="#" class="chat">     <img src='img/Chat.png' />      </a></li>
                 <% if(current_user.get("id")){ %>
-                    <li class="clickable"><a href="#profile/<%= current_user.get('id') %>" class="profile">  <img src='/img/Profile.png' />   </a></li>
+                    <li class="clickable"><a href="#profile/<%= current_user.get('id') %>" class="profile">  <img src='img/Profile.png' />   </a></li>
                 <% }else{  %>
-                    <li class="clickable"><a href="#" class="profile">  <img src='/img/Profile.png' />   </a></li>
+                    <li class="clickable"><a href="#" class="profile">  <img src='img/Profile.png' />   </a></li>
                 <% }%>
-                <li class="clickable"><a href="#" class="settings"> <img src='/img/Settings.png' />  </a></li>
+                <li class="clickable"><a href="#" class="settings"> <img src='img/Settings.png' />  </a></li>
                 
             </ul>
         </nav>
@@ -217,18 +217,17 @@
                     </div>
                 </a>
                         
-                <div id="action">
-                    <div id='left'>
-                        <a href="">
-                            <!-- <img src="img/tickets<%= ev.get('category') %>.png"/> -->
-                            <div class="action_button <%= 'category-' + ev.get('category') %>">Tickets</div>
-                        </a> 
-                    </div>
-                    <div id='right'>
-                            <a href=""><img src="img/share<%= ev.get('category') %>.png"/></a> 
-                        </div>
-                    </div>
-                </div>
+                <div id="action" class="center-text">
+                	<div class="action-button">
+                	<a href="">
+                <img src="img/tickets<%= ev.get('category') %>.png"/>
+                                        <!-- <div class="action_button <%= 'category-' + ev.get('category') %>">Tickets</div> -->
+                                    </a> 
+                                </div>
+                                <div class="action-button">
+                                    <a href=""><img src="img/share<%= ev.get('category') %>.png"/></a> 
+                                </div>
+                            </div>
                 
           
             <hr noshade />

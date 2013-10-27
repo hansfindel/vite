@@ -624,9 +624,17 @@ function toggleDescription(){
     var height = parseInt($(".home_image_container").height())
     //$("#description").css("height", "auto")
     //$("#action").css("height", "auto")
+    
+    var description = $("#description")
+    var temp = description.data("text")
+    description.data("text", description.text())
+    description.text(temp)
+    
     var displacement = parseInt($("#description").height()) + parseInt($("#description").css("margin-bottom")) + 
         parseInt($("#action").height()) + parseInt($("#action").css("margin-top")) +
         parseInt($("#action").css("margin-bottom")) + parseInt($("#action").css("padding-top")) + parseInt($("#action").css("padding-bottom"))
+        
+   displacement += 7; //error margin at parsing int
 
     var margin = $(".category_swipe").length * ( parseInt($(".category_swipe").css("padding-top"))  + parseInt($(".category_swipe").css("padding-bottom")) )
 
@@ -648,14 +656,11 @@ function toggleDescription(){
         $("div#details").css("max-height", "")
         $("div#details").css("height", "")
         //$("#fake_description").hide()
-        var description = $("#description")
-        var temp = description.data("text")
-        description.data("text", description.text())
-        description.text(temp)
+        
     }
     else{
         // from event to feed
-        $(".home_image_container").css("max-height", height + displacement - margin)
+        $(".home_image_container").css("max-height", "");
         //$("#description").css("display", "none");
         //$("#action").css("display", "none");
 
@@ -670,10 +675,6 @@ function toggleDescription(){
         //$("div#details").css("max-height", "110px")
         //$("div#details").css("height", "70px")
         //$("#fake_description").show()
-        var description = $("#description")
-        var temp = description.data("text")
-        description.data("text", description.text())
-        description.text(temp)
     }
 }
 
