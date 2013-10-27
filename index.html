@@ -91,14 +91,14 @@
                             <div id="description" data-text="<%= ev.get('description') %>">
                                 <%= preview_text(ev.get("description")) %>
                             </div>
-                            <div id="action">
-                                <div id='left'>
+                            <div id="action" class="center-text">
+                                <div class="action-button">
                                     <a href="">
                                         <img src="img/tickets<%= ev.get('category') %>.png"/>
                                         <!-- <div class="action_button <%= 'category-' + ev.get('category') %>">Tickets</div> -->
                                     </a> 
                                 </div>
-                                <div id='right'>
+                                <div class="action-button">
                                     <a href=""><img src="img/share<%= ev.get('category') %>.png"/></a> 
                                 </div>
                             </div>

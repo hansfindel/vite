@@ -685,7 +685,7 @@ function append_menu(){
     if($("nav#menu").length == 0){
     	if($("#navigation_navbar") != undefined && $(document.body) != undefined){
 			var menu_html = _.template($("#navigation_navbar").html());
-			if(menu_html != undefined){
+			if(typeof menu_html !== 'undefined'){
 				$(document.body).append(menu_html)
 				$('nav#menu').mmenu({
 					configuration: {pageSelector: '> div[data-role="page"]:first'}
