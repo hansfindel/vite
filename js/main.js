@@ -477,7 +477,7 @@ var AppRouter = Backbone.Router.extend({
         */
         // instaed of changePage transition
         if(ev.get("id") == undefined){app.home(); app.navigate("#"); return;}
-        feed_to_event_menu()
+        feed_to_event_menu(ev.get("id"));
 
         swipeActive = false;
     },
@@ -563,14 +563,17 @@ $(document).ready(function () {
     });
 });
 
-function feed_to_event_menu(){
+function feed_to_event_menu(id){
     $("h1.header-title").text("Event")
     var link = $("a#menu");
-    link.attr("href", "#home")
-    link.addClass("back-link")
-    link.removeClass("menu-link")
-    link.removeClass("ui-link")
-    $(".view_more_recommendations").fadeIn()
+    link.attr("href", "#home");
+    link.addClass("back-link");
+    link.removeClass("menu-link");
+    link.removeClass("ui-link");
+    if(recommendationCollection != undefined &&  recommendationCollection.filterById(ev.id) != undefined && 
+    		recommendationCollection.filterById(ev.id).length > 1){
+    	$(".view_more_recommendations").fadeIn()
+    }
     $("nav#menu").remove()
     //link.removeAttr("id")
 
@@ -682,10 +685,12 @@ function append_menu(){
     if($("nav#menu").length == 0){
     	if($("#navigation_navbar") != undefined && $(document.body) != undefined){
 			var menu_html = _.template($("#navigation_navbar").html());
-			$(document.body).append(menu_html)
-			$('nav#menu').mmenu({
-				configuration: {pageSelector: '> div[data-role="page"]:first'}
-			});
+			if(menu_html != undefined){
+				$(document.body).append(menu_html)
+				$('nav#menu').mmenu({
+					configuration: {pageSelector: '> div[data-role="page"]:first'}
+				});
+			}
     	} 
     }
 }
