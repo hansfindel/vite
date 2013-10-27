@@ -220,8 +220,6 @@ window.HomeView = Backbone.View.extend({
             $(this.el).html( this.template({ev: ev, prev: prev, next: next}) );
         }
         
-        append_menu() // if it there isnt one
-        
         return this;
     },
 
@@ -445,6 +443,22 @@ var AppRouter = Backbone.Router.extend({
             this.changePage(new HomeView({ collection: home_collection }),'slide',true);
         }
         swipeActive = true;
+        
+        append_menu(); // if it there isnt one 
+        
+        $("div[data-role='page']").touchwipe({
+            wipeUp: function() {
+                //eventId++;
+                //app.home('slideup');
+            	swipeUp();
+            },
+            wipeDown: function() {
+            	swipeDown();
+            },
+            min_move_x: 15,
+            min_move_y: 15,
+            preventDefaultEvents: false
+        });
     },
     home_category: function(category_id){
         //console.log("#home_category")
@@ -464,7 +478,7 @@ var AppRouter = Backbone.Router.extend({
         */
         // instaed of changePage transition
         if(ev.get("id") == undefined){app.home(); app.navigate("#"); return;}
-        feed_to_event_menu()
+        feed_to_event_menu(ev.get("id"));
 
         swipeActive = false;
     },
@@ -540,20 +554,6 @@ $(document).ready(function () {
         configuration: {pageSelector: '> div[data-role="page"]:first'}
     });
 
-    $(document.body).touchwipe({
-        wipeUp: function() {
-            //eventId++;
-            //app.home('slideup');
-        	swipeUp();
-        },
-        wipeDown: function() {
-        	swipeDown();
-        },
-        min_move_x: 15,
-        min_move_y: 15,
-        preventDefaultEvents: false
-    });
-
     $(document).on('pageshow',function( e, ui ){
         $('#menu').trigger( 'setPage', [ $(e.target) ] );
         $('#menu a').each(function(){
@@ -564,14 +564,17 @@ $(document).ready(function () {
     });
 });
 
-function feed_to_event_menu(){
+function feed_to_event_menu(id){
     $("h1.header-title").text("Event")
     var link = $("a#menu");
-    link.attr("href", "#home")
-    link.addClass("back-link")
-    link.removeClass("menu-link")
-    link.removeClass("ui-link")
-    $(".view_more_recommendations").fadeIn()
+    link.attr("href", "#home");
+    link.addClass("back-link");
+    link.removeClass("menu-link");
+    link.removeClass("ui-link");
+    if(recommendationCollection != undefined &&  recommendationCollection.filterById(ev.id) != undefined && 
+    		recommendationCollection.filterById(ev.id).length > 1){
+    	$(".view_more_recommendations").fadeIn()
+    }
     $("nav#menu").remove()
     //link.removeAttr("id")
 
@@ -622,9 +625,17 @@ function toggleDescription(){
     var height = parseInt($(".home_image_container").height())
     //$("#description").css("height", "auto")
     //$("#action").css("height", "auto")
+    
+    var description = $("#description")
+    var temp = description.data("text")
+    description.data("text", description.text())
+    description.text(temp)
+    
     var displacement = parseInt($("#description").height()) + parseInt($("#description").css("margin-bottom")) + 
         parseInt($("#action").height()) + parseInt($("#action").css("margin-top")) +
         parseInt($("#action").css("margin-bottom")) + parseInt($("#action").css("padding-top")) + parseInt($("#action").css("padding-bottom"))
+        
+   displacement += 7; //error margin at parsing int
 
     var margin = $(".category_swipe").length * ( parseInt($(".category_swipe").css("padding-top"))  + parseInt($(".category_swipe").css("padding-bottom")) )
 
@@ -646,14 +657,11 @@ function toggleDescription(){
         $("div#details").css("max-height", "")
         $("div#details").css("height", "")
         //$("#fake_description").hide()
-        var description = $("#description")
-        var temp = description.data("text")
-        description.data("text", description.text())
-        description.text(temp)
+        
     }
     else{
         // from event to feed
-        $(".home_image_container").css("max-height", height + displacement - margin)
+        $(".home_image_container").css("max-height", "");
         //$("#description").css("display", "none");
         //$("#action").css("display", "none");
 
@@ -668,10 +676,6 @@ function toggleDescription(){
         //$("div#details").css("max-height", "110px")
         //$("div#details").css("height", "70px")
         //$("#fake_description").show()
-        var description = $("#description")
-        var temp = description.data("text")
-        description.data("text", description.text())
-        description.text(temp)
     }
 }
 
@@ -681,11 +685,15 @@ function compile_template(template_name, params){
 }
 function append_menu(){
     if($("nav#menu").length == 0){
-        var menu_html = _.template($("#navigation_navbar").html(), {});
-        $("body").append(menu_html)
-        $('nav#menu').mmenu({
-            configuration: {pageSelector: '> div[data-role="page"]:first'}
-        });
+    	if($("#navigation_navbar") != undefined && $(document.body) != undefined){
+			var menu_html = _.template($("#navigation_navbar").html());
+			if(typeof menu_html !== 'undefined'){
+				$(document.body).append(menu_html)
+				$('nav#menu').mmenu({
+					configuration: {pageSelector: '> div[data-role="page"]:first'}
+				});
+			}
+    	} 
     }
 }
 

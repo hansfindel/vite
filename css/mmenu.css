@@ -42,10 +42,12 @@ html.mm-accelerated.mm-opening .mm-page,
 html.mm-accelerated.mm-opening #mm-blocker,
 html.mm-accelerated .mm-menu.mm-horizontal ul.mm-subopening
 {
+	/*
 	-webkit-transform: translate3d( 0, 0, 1px );
 	-moz-transform: translate3d( 0, 0, 1px );
 	-o-transform: translate3d( 0, 0, 1px );
 	transform: translate3d( 0, 0, 1px );
+	*/
 }
 
 /* top */
@@ -404,9 +406,6 @@ html.mm-blocking #mm-blocker
 {
 	color: #DADADA;
 	text-decoration: none;
-	
-	margin-top: 10px;
-	margin-bottom: 10px;
 }
 
 
@@ -703,7 +702,6 @@ html.mm-no-overflowscrolling.mm-right .mm-menu
 	Sizing and positioning for larger screens
 */
 .mm-menu, #menu{
-		z-index: 999;
 		display: none;
 }
 #menu.mm-opened{
